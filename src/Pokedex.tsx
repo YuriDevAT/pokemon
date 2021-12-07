@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 const Pokedex = () => {
   const [pokemon, setPokemon] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPokemon();
+    getPokedex();
   }, []);
 
-  const getPokemon = async () => {
+  const getPokedex = async () => {
     try {
-      const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=5');
+      const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
       const { results } = await res.json();
       const pokedex = results.map((pokemon: any, index: number) => {
         const paddedId = ('00' + (index + 1)).slice(-3);
@@ -17,24 +21,31 @@ const Pokedex = () => {
         return { ...pokemon, image };
       });
       setPokemon(pokedex);
+      setLoading(false);
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <div>
-      {pokemon.map((pokemon: any, index: number) => (
-        <li key={index}>
-          <a href={`/pokedex?id=${index + 1}`}>
-            <img src={pokemon.image} alt={pokemon.name} />
-            <p>
-              {index + 1}.<span>{pokemon.name}</span>
-            </p>
-          </a>
-        </li>
-      ))}
-    </div>
+    <Container>
+      {loading ? (
+        'Fetching Pokemon...'
+      ) : (
+        <Row>
+          {pokemon.map((pokemon: any, index: number) => (
+            <Col key={index} xs={1} sm={1} md={1} lg={1} xl={1}>
+              <a href={`/pokemon/${index + 1}`}>
+                <img src={pokemon.image} alt={pokemon.name} />
+                <p>
+                  {index + 1}.<span>{pokemon.name}</span>
+                </p>
+              </a>
+            </Col>
+          ))}
+        </Row>
+      )}
+    </Container>
   );
 };
 
