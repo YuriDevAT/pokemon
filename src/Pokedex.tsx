@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -35,12 +36,12 @@ const Pokedex = () => {
         <Row>
           {pokemon.map((pokemon: any, index: number) => (
             <Col key={index} xs={1} sm={1} md={1} lg={1} xl={1}>
-              <a href={`/pokemon/${index + 1}`}>
+              <Link to={`/pokemon/${index + 1}`}>
                 <img src={pokemon.image} alt={pokemon.name} />
                 <p>
                   {index + 1}.<span>{pokemon.name}</span>
                 </p>
-              </a>
+              </Link>
             </Col>
           ))}
         </Row>
