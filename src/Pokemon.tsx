@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
+import { ListGroup, ProgressBar } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -31,52 +36,96 @@ const Pokemon = () => {
     navigate('/');
   };
 
+  let bgColor = pokemonDetails.types && pokemonDetails.types[0].type.name;
+
   return (
-    <Container fluid>
+    <Container fluid className={bgColor}>
       {loading ? (
         <Spinner animation='border' role='status'>
           <span className='visually-hidden'>Fetching Pokemon...</span>
         </Spinner>
       ) : (
-        <div>
-          <h2>{pokemonDetails.name}</h2>
-          <h2>{pokemonDetails.id}</h2>
-          <img src={pokemonDetails.image} alt={pokemonDetails.name} />
-          <h3>Types</h3>
-          <p>
-            {pokemonDetails.types.map((type: any, index: number) => (
-              <p key={index}>{type.type.name}</p>
-            ))}
-          </p>
-          <h3>Abilities</h3>
-          <p>
-            {pokemonDetails.abilities.map((ability: any, index: number) => (
-              <p key={index}>{ability.ability.name}</p>
-            ))}
-          </p>
-          <h3>Stats</h3>
-          <p>
-            {pokemonDetails.stats.map((stat: any, index: number) => (
-              <p key={index}>
-                {stat.stat.name} {stat.base_stat}
-              </p>
-            ))}
-          </p>
-          <h3>Moves</h3>
-          <p className='moves'>
-            {pokemonDetails.moves
-              .slice(0, 3)
-              .map((move: any, index: number) => (
-                <p key={index}>{move.move.name}</p>
-              ))}
-          </p>
-          {/* <p className='possible evolution'>
+        <>
+          <Row>
+            <Col>
+              <Card>
+                <Card.Title>{pokemonDetails.name}</Card.Title>
+                <Card.Text>
+                  #{pokemonDetails.id.toString().padStart(3, '0')}
+                </Card.Text>
+              </Card>
+            </Col>
+          </Row>
+          <Row xs={1} md={2}>
+            <Col>
+              <Card>
+                <Card.Img
+                  src={pokemonDetails.image}
+                  alt={pokemonDetails.name}
+                />
+                <Card.Body>
+                  <Card.Title>Types</Card.Title>
+                  <ListGroup>
+                    {pokemonDetails.types.map((type: any, index: number) => (
+                      <ListGroup.Item key={index}>
+                        {type.type.name}
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                  <Card.Title>Abilities</Card.Title>
+                  <ListGroup>
+                    {pokemonDetails.abilities.map(
+                      (ability: any, index: number) => (
+                        <ListGroup.Item key={index}>
+                          {ability.ability.name}
+                        </ListGroup.Item>
+                      )
+                    )}
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card>
+                <Card.Title>Stats</Card.Title>
+                <ListGroup>
+                  {pokemonDetails.stats.map((stat: any, index: number) => (
+                    <ListGroup.Item>
+                      {stat.stat.name}
+                      <ProgressBar
+                        key={index}
+                        now={stat.base_stat}
+                        label={stat.base_stat}
+                      />
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+                <Card.Title>Moves</Card.Title>
+                <ListGroup className='moves'>
+                  {pokemonDetails.moves
+                    .slice(0, 3)
+                    .map((move: any, index: number) => (
+                      <ListGroup.Item key={index}>
+                        {move.move.name}
+                      </ListGroup.Item>
+                    ))}
+                </ListGroup>
+              </Card>
+            </Col>
+            <Col>
+              {/* <p className='possible evolution'>
       {pokemonDetails.stats.map((type: any, index: number) => (
         <p key={index}>{type.type.name}</p>
       ))}
     </p> */}
-          <button onClick={handleClick}>Catch another Pokémon</button>
-        </div>
+            </Col>
+          </Row>
+          <Row>
+            <Button variant='dark' onClick={handleClick}>
+              Catch another Pokémon
+            </Button>
+          </Row>
+        </>
       )}
     </Container>
   );
