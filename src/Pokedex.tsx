@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
+import Card from 'react-bootstrap/Card';
 
 const Pokedex = () => {
   const [pokemon, setPokemon] = useState([]);
@@ -29,19 +31,30 @@ const Pokedex = () => {
   };
 
   return (
-    <Container>
+    <Container fluid className='pokedex'>
       {loading ? (
-        'Fetching Pokemon...'
+        <Spinner animation='border' role='status'>
+          <span className='visually-hidden'>Fetching Pokemon...</span>
+        </Spinner>
       ) : (
         <Row>
           {pokemon.map((pokemon: any, index: number) => (
-            <Col key={index} xs={1} sm={1} md={1} lg={1} xl={1}>
-              <Link to={`/pokemon/${index + 1}`}>
-                <img src={pokemon.image} alt={pokemon.name} />
-                <p>
-                  {index + 1}.<span>{pokemon.name}</span>
-                </p>
-              </Link>
+            <Col key={index} xs={12} sm={6} lg={4} xl={2} className='col'>
+              <Card>
+                <Link to={`/pokemon/${index + 1}`}>
+                  <Card.Img
+                    src={pokemon.image}
+                    alt={pokemon.name}
+                    width='100'
+                  />
+                  <Card.Body>
+                    <Card.Text>
+                      #{(index + 1).toString().padStart(3, '0')}
+                    </Card.Text>
+                    <Card.Title>{pokemon.name}</Card.Title>
+                  </Card.Body>
+                </Link>
+              </Card>
             </Col>
           ))}
         </Row>
