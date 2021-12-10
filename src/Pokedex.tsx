@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Spinner from 'react-bootstrap/Spinner';
-import Card from 'react-bootstrap/Card';
+import { Container, Card, Col, Row, Spinner } from 'react-bootstrap';
 
 const Pokedex = () => {
   const [pokemon, setPokemon] = useState([]);
@@ -42,11 +38,7 @@ const Pokedex = () => {
             <Col key={index} xs={12} sm={6} lg={4} xl={2} className='col'>
               <Card>
                 <Link to={`/pokemon/${index + 1}`}>
-                  <Card.Img
-                    src={pokemon.image}
-                    alt={pokemon.name}
-                    width='100'
-                  />
+                  <Card.Img src={pokemon.image} alt={pokemon.name} />
                   <Card.Body>
                     <Card.Text>
                       #{(index + 1).toString().padStart(3, '0')}

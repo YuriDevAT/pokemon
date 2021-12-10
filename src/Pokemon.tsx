@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
-import { ListGroup, Nav, ProgressBar, Tab, Tabs } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Spinner from 'react-bootstrap/Spinner';
+import {
+  Button,
+  Col,
+  Container,
+  Image,
+  Row,
+  Spinner,
+  ListGroup,
+  ProgressBar,
+  Tab,
+  Tabs,
+} from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Pokemon = () => {
@@ -45,31 +50,32 @@ const Pokemon = () => {
           <span className='visually-hidden'>Fetching Pokemon...</span>
         </Spinner>
       ) : (
-        <>
-          <Row xs={1}>
+        <div className='details' style={{ position: 'relative' }}>
+          <Row>
             <Col className='header'>
-              <Card className='details-name'>
-                <Card.Title>{pokemonDetails.name}</Card.Title>
-                <Card.Text>
-                  #{pokemonDetails.id.toString().padStart(3, '0')}
-                </Card.Text>
-                <ListGroup>
-                  {pokemonDetails.types.map((type: any, index: number) => (
-                    <ListGroup.Item key={index}>
-                      {type.type.name}
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-                <Card.Img
-                  src={pokemonDetails.image}
-                  alt={pokemonDetails.name}
-                />
-              </Card>
+              <h1>{pokemonDetails.name}</h1>
+              <h3>#{pokemonDetails.id.toString().padStart(3, '0')}</h3>
             </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroup className='type'>
+                {pokemonDetails.types.map((type: any, index: number) => (
+                  <ListGroup.Item key={index}>{type.type.name}</ListGroup.Item>
+                ))}
+              </ListGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Image
+              src={pokemonDetails.image}
+              alt={pokemonDetails.name}
+              roundedCircle
+            />
           </Row>
           <Tab.Container defaultActiveKey='abilities'>
             <Row className='clearfix'>
-              <Col sm={12}>
+              <Col sm={12} className='box'>
                 <Tabs>
                   <Tab eventKey='abilities' title='Abilities'>
                     <ListGroup>
@@ -98,7 +104,7 @@ const Pokemon = () => {
                   <Tab eventKey='moves' title='Moves'>
                     <ListGroup className='moves'>
                       {pokemonDetails.moves
-                        .slice(0, 3)
+                        .slice(0, 65)
                         .map((move: any, index: number) => (
                           <ListGroup.Item key={index}>
                             {move.move.name}
@@ -117,12 +123,10 @@ const Pokemon = () => {
               </Col>
             </Row>
           </Tab.Container>
-          <Row>
-            <Button variant='dark' onClick={handleClick}>
-              Catch another Pokémon
-            </Button>
-          </Row>
-        </>
+          <Button variant='dark' onClick={handleClick}>
+            Catch another Pokémon
+          </Button>
+        </div>
       )}
     </Container>
   );
