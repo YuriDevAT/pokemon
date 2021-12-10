@@ -18,7 +18,8 @@ body {
   background-image: linear-gradient(to right, #dae2f8, #d6a4a4);
 }
 
-.pokedex .col {
+.pokedex .col,
+.pokemon .col {
   display: flex;
   justify-content: center;
 }
@@ -44,22 +45,40 @@ a:hover {
 }
 
 .pokemon {
+  margin: 0 auto;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.pokemon .card-img {
-  width: 300px;
+.pokemon .header {
+  width: 100%;
+  text-align: center;
+  padding: 25px 0;
+}
+
+.pokemon .card {
+  width: 350px;
+  margin: 25px;
+  border: none;
+  background-color: inherit;
 }
 
 .btn {
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
 }
 
 .btn-dark:hover {
   background-color: #544a7d;
   border-color: #544a7d;
 }
+
+/* BACKGROUDCOLOR */
 
 .rock {
   background-color: #d5d5d4;

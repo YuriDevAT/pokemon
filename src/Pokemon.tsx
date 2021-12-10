@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ListGroup, ProgressBar } from 'react-bootstrap';
+import { ListGroup, Nav, ProgressBar, Tab, Tabs } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
@@ -39,87 +39,84 @@ const Pokemon = () => {
   let bgColor = pokemonDetails.types && pokemonDetails.types[0].type.name;
 
   return (
-    <Container fluid className={bgColor}>
+    <Container fluid className={`pokemon ${bgColor}`}>
       {loading ? (
         <Spinner animation='border' role='status'>
           <span className='visually-hidden'>Fetching Pokemon...</span>
         </Spinner>
       ) : (
         <>
-          <Row>
-            <Col>
-              <Card>
+          <Row xs={1}>
+            <Col className='header'>
+              <Card className='details-name'>
                 <Card.Title>{pokemonDetails.name}</Card.Title>
                 <Card.Text>
                   #{pokemonDetails.id.toString().padStart(3, '0')}
                 </Card.Text>
-              </Card>
-            </Col>
-          </Row>
-          <Row xs={1} md={2}>
-            <Col>
-              <Card>
+                <ListGroup>
+                  {pokemonDetails.types.map((type: any, index: number) => (
+                    <ListGroup.Item key={index}>
+                      {type.type.name}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
                 <Card.Img
                   src={pokemonDetails.image}
                   alt={pokemonDetails.name}
                 />
-                <Card.Body>
-                  <Card.Title>Types</Card.Title>
-                  <ListGroup>
-                    {pokemonDetails.types.map((type: any, index: number) => (
-                      <ListGroup.Item key={index}>
-                        {type.type.name}
-                      </ListGroup.Item>
-                    ))}
-                  </ListGroup>
-                  <Card.Title>Abilities</Card.Title>
-                  <ListGroup>
-                    {pokemonDetails.abilities.map(
-                      (ability: any, index: number) => (
+              </Card>
+            </Col>
+          </Row>
+          <Tab.Container defaultActiveKey='abilities'>
+            <Row className='clearfix'>
+              <Col sm={12}>
+                <Tabs>
+                  <Tab eventKey='abilities' title='Abilities'>
+                    <ListGroup>
+                      {pokemonDetails.abilities.map(
+                        (ability: any, index: number) => (
+                          <ListGroup.Item key={index}>
+                            {ability.ability.name}
+                          </ListGroup.Item>
+                        )
+                      )}
+                    </ListGroup>
+                  </Tab>
+                  <Tab eventKey='stats' title='Stats'>
+                    <ListGroup>
+                      {pokemonDetails.stats.map((stat: any, index: number) => (
                         <ListGroup.Item key={index}>
-                          {ability.ability.name}
+                          {stat.stat.name}
+                          <ProgressBar
+                            now={stat.base_stat}
+                            label={stat.base_stat}
+                          />
                         </ListGroup.Item>
-                      )
-                    )}
-                  </ListGroup>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col>
-              <Card>
-                <Card.Title>Stats</Card.Title>
-                <ListGroup>
-                  {pokemonDetails.stats.map((stat: any, index: number) => (
-                    <ListGroup.Item>
-                      {stat.stat.name}
-                      <ProgressBar
-                        key={index}
-                        now={stat.base_stat}
-                        label={stat.base_stat}
-                      />
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-                <Card.Title>Moves</Card.Title>
-                <ListGroup className='moves'>
-                  {pokemonDetails.moves
-                    .slice(0, 3)
-                    .map((move: any, index: number) => (
-                      <ListGroup.Item key={index}>
-                        {move.move.name}
-                      </ListGroup.Item>
-                    ))}
-                </ListGroup>
-              </Card>
-            </Col>
-            <Col>
-              {/* <p className='possible evolution'>
+                      ))}
+                    </ListGroup>
+                  </Tab>
+                  <Tab eventKey='moves' title='Moves'>
+                    <ListGroup className='moves'>
+                      {pokemonDetails.moves
+                        .slice(0, 3)
+                        .map((move: any, index: number) => (
+                          <ListGroup.Item key={index}>
+                            {move.move.name}
+                          </ListGroup.Item>
+                        ))}
+                    </ListGroup>
+                  </Tab>
+                  <Tab eventKey='evolutions' title='Evolutions' disabled>
+                    {/* <p className='possible evolution'>
       {pokemonDetails.stats.map((type: any, index: number) => (
         <p key={index}>{type.type.name}</p>
       ))}
     </p> */}
-            </Col>
-          </Row>
+                  </Tab>
+                </Tabs>
+              </Col>
+            </Row>
+          </Tab.Container>
           <Row>
             <Button variant='dark' onClick={handleClick}>
               Catch another Pokémon
