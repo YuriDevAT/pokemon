@@ -83,7 +83,7 @@ a:hover {
   background-color: rgba(256, 256, 256, 0.4);
 }
 
-.rounded-circle {
+.pokemon-img {
   max-width: 350px;
   margin: 0 auto;
   z-index: 10;
@@ -139,61 +139,4 @@ a:hover {
 .btn-dark:hover {
   background-color: #e3350d;
   border-color: #e3350d;
-}
-
-/* BACKGROUDCOLOR */
-
-.rock {
-  background-color: #a38c21;
-}
-.ghost {
-  background-color: #7b62a3;
-}
-.electric {
-  background-color: #eed535;
-}
-.bug {
-  background-color: #729f3f;
-}
-.poison {
-  background-color: #b97fc9;
-}
-.normal {
-  background-color: #a4acaf;
-}
-.fairy {
-  background-color: #fdb9e9;
-}
-.fire {
-  background-color: #fd7d24;
-}
-.grass {
-  background-color: #9bcc50;
-}
-.water {
-  background-color: #4592c4;
-}
-.dragon {
-  background-image: linear-gradient(#53a4cf 50%, #f16e57 50%);
-}
-.psychic {
-  background-color: #f366b9;
-}
-.flying {
-  background-image: linear-gradient(#3dc7ef 50%, #bdb9b8 50%);
-}
-.fighting {
-  background-color: #d56723;
-}
-.ground {
-  background-image: linear-gradient(#ab9842 50%, #f7de3f 50%);
-}
-.steel {
-  background-color: #9eb7b8;
-}
-.dark {
-  background-color: #707070;
-}
-.ice {
-  background-color: #51c4e7;
 }

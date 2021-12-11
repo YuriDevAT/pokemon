@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { colors } from './utils/bgColor';
 import {
   Button,
   Col,
@@ -42,10 +43,11 @@ const Pokemon = () => {
     navigate('/');
   };
 
-  let bgColor = pokemonDetails.types && pokemonDetails.types[0].type.name;
+  let typeName = pokemonDetails.types && pokemonDetails.types[0].type.name;
+  const bgColor: string = colors[typeName];
 
   return (
-    <Container fluid className={`pokemon ${bgColor}`}>
+    <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
       {loading ? (
         <Spinner animation='border' role='status'>
           <span className='visually-hidden'>Fetching Pokemon...</span>
@@ -71,7 +73,7 @@ const Pokemon = () => {
             <Image
               src={pokemonDetails.image}
               alt={pokemonDetails.name}
-              roundedCircle
+              className='pokemon-img'
             />
           </Row>
           <TabContainer>
