@@ -62,7 +62,7 @@ a:hover {
 }
 
 .pokemon .header {
-  padding: 25px 0;
+  padding: 25px 0 0;
   display: flex;
   justify-content: space-between;
 }
@@ -72,6 +72,7 @@ a:hover {
   flex-direction: row;
   flex-wrap: wrap;
   text-align: center;
+  margin-bottom: -20px;
 }
 
 .type .list-group-item {
@@ -91,12 +92,12 @@ a:hover {
 .box {
   background-color: white;
   min-height: 450px;
-  margin-top: -80px;
+  margin: -80px 0 20px;
   border-radius: 20px;
 }
 
 .nav {
-  margin: 20px 0;
+  margin: 30px 0 10px;
 }
 
 .nav-link {
@@ -129,7 +130,7 @@ a:hover {
   height: 120px;
   position: absolute;
   right: -35px;
-  top: 330px;
+  top: 290px;
   z-index: 50;
   transform: rotate(20deg);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

@@ -10,6 +10,7 @@ import {
   ProgressBar,
   Tab,
   Tabs,
+  TabContainer,
 } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -73,10 +74,10 @@ const Pokemon = () => {
               roundedCircle
             />
           </Row>
-          <Tab.Container defaultActiveKey='abilities'>
+          <TabContainer>
             <Row className='clearfix'>
               <Col sm={12} className='box'>
-                <Tabs>
+                <Tabs defaultActiveKey='stats'>
                   <Tab eventKey='abilities' title='Abilities'>
                     <ListGroup>
                       {pokemonDetails.abilities.map(
@@ -104,7 +105,7 @@ const Pokemon = () => {
                   <Tab eventKey='moves' title='Moves'>
                     <ListGroup className='moves'>
                       {pokemonDetails.moves
-                        .slice(0, 65)
+                        .slice(0, 62)
                         .map((move: any, index: number) => (
                           <ListGroup.Item key={index}>
                             {move.move.name}
@@ -122,7 +123,7 @@ const Pokemon = () => {
                 </Tabs>
               </Col>
             </Row>
-          </Tab.Container>
+          </TabContainer>
           <Button variant='dark' onClick={handleClick}>
             Catch another Pokémon
           </Button>
