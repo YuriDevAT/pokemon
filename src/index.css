@@ -57,7 +57,7 @@ a:hover {
   align-items: flex-end;
   z-index: 1000;
   cursor: pointer;
-  animation: fadeIn 0.3s;
+  animation: fadeIn 0.5s;
   transition: opacity 0.4s;
   opacity: 0.5;
 }
