@@ -36,14 +36,7 @@ const Pokedex = () => {
       ) : (
         <Row>
           {pokemon.map((pokemon: any, index: number) => (
-            <Col
-              key={index}
-              xs={12}
-              sm={6}
-              lg={4}
-              xl={2}
-              className='pokedex__col'
-            >
+            <Col key={index} xs={12} sm={6} lg={4} xl={2} className='col'>
               <Card>
                 <Link to={`/pokemon/${index + 1}`}>
                   <Card.Img src={pokemon.image} alt={pokemon.name} />
