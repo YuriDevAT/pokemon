@@ -18,6 +18,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Pokemon = () => {
   const [pokemonDetails, setPokemonDetails] = useState<any>([]);
   const [loading, setLoading] = useState(true);
+  const [species, setSpecies] = useState<any>([]);
+  const [evolution, setEvolution] = useState<any>([]);
 
   const { id } = useParams();
 
@@ -34,8 +36,37 @@ const Pokemon = () => {
     }
   };
 
+  const getSpecies = async (id: string | undefined) => {
+    try {
+      const res = await fetch(
+        `https://pokeapi.co/api/v2/pokemon-species/${id}`
+      );
+      const result = await res.json();
+      setSpecies(result);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const chainUrl = species.evolution_chain && species.evolution_chain.url;
+  console.log(chainUrl);
+
+  useEffect(() => {
+    const getEvolution = async () => {
+      try {
+        const res = await fetch(chainUrl);
+        const pokemon = await res.json();
+        setEvolution(pokemon);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getEvolution();
+  }, [chainUrl]);
+
   useEffect(() => {
     getPokemon(id);
+    getSpecies(id);
   }, [id]);
 
   let navigate = useNavigate();
@@ -45,6 +76,15 @@ const Pokemon = () => {
 
   let typeName = pokemonDetails.types && pokemonDetails.types[0].type.name;
   const bgColor: string = colors[typeName];
+
+  let evolutionOne = evolution.chain && evolution.chain.species.name;
+  console.log(evolutionOne);
+  let evolutionTwo =
+    evolution.chain && evolution.chain.evolves_to[0].species.name;
+  console.log(evolutionTwo);
+  let evolutionThree =
+    evolution.chain && evolution.chain.evolves_to[0].evolves_to[0].species.name;
+  console.log(evolutionThree);
 
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
@@ -115,12 +155,21 @@ const Pokemon = () => {
                         ))}
                     </ListGroup>
                   </Tab>
-                  <Tab eventKey='evolutions' title='Evolutions' disabled>
-                    {/* <p className='possible evolution'>
-      {pokemonDetails.stats.map((type: any, index: number) => (
-        <p key={index}>{type.type.name}</p>
-      ))}
-    </p> */}
+                  <Tab eventKey='evolutions' title='Evolutions'>
+                    <ListGroup>
+                      <ListGroup.Item>
+                        {evolution.image}
+                        {evolutionOne}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        {evolution.image}
+                        {evolutionTwo}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        {evolution.image}
+                        {evolutionThree}
+                      </ListGroup.Item>
+                    </ListGroup>
                   </Tab>
                 </Tabs>
               </Col>
