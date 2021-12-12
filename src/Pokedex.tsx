@@ -13,7 +13,7 @@ const Pokedex = () => {
 
   const getPokedex = async () => {
     try {
-      const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+      const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=898');
       const { results } = await res.json();
       const pokedex = results.map((pokemon: any, index: number) => {
         const paddedId = ('00' + (index + 1)).slice(-3);
