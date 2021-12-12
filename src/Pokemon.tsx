@@ -127,7 +127,7 @@ const Pokemon = () => {
             </Row>
           </TabContainer>
           <Button variant='dark' onClick={handleClick}>
-            Catch another Pokémon
+            <span>Catch another Pokémon</span>
           </Button>
         </div>
       )}
