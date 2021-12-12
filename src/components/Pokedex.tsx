@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ScrollArrow } from './utils/scrollArrow';
+import { ScrollArrow } from '../utils/scrollArrow';
 import { Container, Card, Col, Row, Spinner } from 'react-bootstrap';
 
 const Pokedex = () => {
@@ -36,7 +36,14 @@ const Pokedex = () => {
       ) : (
         <Row>
           {pokemon.map((pokemon: any, index: number) => (
-            <Col key={index} xs={12} sm={6} lg={4} xl={2} className='col'>
+            <Col
+              key={index}
+              xs={12}
+              sm={6}
+              lg={4}
+              xl={2}
+              className='pokedex__col'
+            >
               <Card>
                 <Link to={`/pokemon/${index + 1}`}>
                   <Card.Img src={pokemon.image} alt={pokemon.name} />
