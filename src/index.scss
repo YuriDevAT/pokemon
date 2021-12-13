@@ -99,7 +99,7 @@ body {
     .details--img {
       max-width: 350px;
       margin: 0 auto;
-      z-index: 10;
+      z-index: 1;
     }
     .box {
       background-color: white;
@@ -108,9 +108,12 @@ body {
       border-radius: 20px;
       .nav {
         margin: 30px 0 10px;
+        position: relative;
+        z-index: 2;
       }
       .nav-link {
         color: #000;
+        z-index: 20;
         &.disabled {
           color: #d3d3d3;
         }
@@ -129,6 +132,18 @@ body {
       .list-group-item {
         border: none;
         background-color: none;
+      }
+      .box--evolutions {
+        height: 350px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .list-group-item {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+        }
       }
     }
     .btn {
