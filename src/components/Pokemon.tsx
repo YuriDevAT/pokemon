@@ -13,7 +13,7 @@ import {
   Tabs,
   TabContainer,
 } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Pokemon = () => {
   const [pokemonDetails, setPokemonDetails] = useState<any>([]);
@@ -49,7 +49,6 @@ const Pokemon = () => {
   };
 
   const chainUrl = species.evolution_chain && species.evolution_chain.url;
-  console.log(chainUrl);
 
   useEffect(() => {
     const getEvolution = async () => {
@@ -78,13 +77,30 @@ const Pokemon = () => {
   const bgColor: string = colors[typeName];
 
   let evolutionOne = evolution.chain && evolution.chain.species.name;
-  console.log(evolutionOne);
+  let urlOne =
+    evolution.chain &&
+    evolution.chain.species.url.substr(42).replace('/', '').padStart(3, '0');
+  let imgOne = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlOne}.png`;
+
   let evolutionTwo =
     evolution.chain && evolution.chain.evolves_to[0].species.name;
-  console.log(evolutionTwo);
+  let urlTwo =
+    evolution.chain &&
+    evolution.chain.evolves_to[0].species.url
+      .substr(42)
+      .replace('/', '')
+      .padStart(3, '0');
+  let imgTwo = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlTwo}.png`;
+
   let evolutionThree =
     evolution.chain && evolution.chain.evolves_to[0].evolves_to[0].species.name;
-  console.log(evolutionThree);
+  let urlThree =
+    evolution.chain &&
+    evolution.chain.evolves_to[0].evolves_to[0].species.url
+      .substr(42)
+      .replace('/', '')
+      .padStart(3, '0');
+  let imgThree = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlThree}.png`;
 
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
@@ -113,6 +129,7 @@ const Pokemon = () => {
             <Image
               src={pokemonDetails.image}
               alt={pokemonDetails.name}
+              width='350px'
               className='details--img'
             />
           </Row>
@@ -156,18 +173,36 @@ const Pokemon = () => {
                     </ListGroup>
                   </Tab>
                   <Tab eventKey='evolutions' title='Evolutions'>
-                    <ListGroup>
+                    <ListGroup className='box--evolutions'>
                       <ListGroup.Item>
-                        {evolution.image}
-                        {evolutionOne}
+                        <Link to={`/pokemon/${1}`}>
+                          <Image
+                            src={imgOne}
+                            alt={evolutionOne}
+                            width='200px'
+                          />
+                          {evolutionOne}
+                        </Link>
                       </ListGroup.Item>
                       <ListGroup.Item>
-                        {evolution.image}
-                        {evolutionTwo}
+                        <Link to={`/pokemon/${2}`}>
+                          <Image
+                            src={imgTwo}
+                            alt={evolutionTwo}
+                            width='200px'
+                          />
+                          {evolutionTwo}
+                        </Link>
                       </ListGroup.Item>
                       <ListGroup.Item>
-                        {evolution.image}
-                        {evolutionThree}
+                        <Link to={`/pokemon/${3}`}>
+                          <Image
+                            src={imgThree}
+                            alt={evolutionThree}
+                            width='200px'
+                          />
+                          {evolutionThree}
+                        </Link>
                       </ListGroup.Item>
                     </ListGroup>
                   </Tab>
