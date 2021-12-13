@@ -81,6 +81,10 @@ const Pokemon = () => {
     evolution.chain &&
     evolution.chain.evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[0];
+  const hasVariety =
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[1];
   const noEvolution = evolution.chain && !evolution.chain.evolves_to.length;
 
   let evolutionOne = evolution.chain && evolution.chain.species.name;
@@ -118,6 +122,25 @@ const Pokemon = () => {
     evolution.chain.evolves_to[0].evolves_to[0] &&
     urlThree.padStart(3, '0');
   let imgThree = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlThree}.png`;
+
+  let evolutionVariety =
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[1] &&
+    evolution.chain.evolves_to[0].evolves_to[1].species.name;
+  let urlVariety =
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[1] &&
+    evolution.chain.evolves_to[0].evolves_to[1].species.url
+      .substr(42)
+      .replace('/', '');
+  let imgUrlVariety =
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[1] &&
+    urlVariety.padStart(3, '0');
+  let imgVariety = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlVariety}.png`;
 
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
@@ -219,7 +242,7 @@ const Pokemon = () => {
                             {evolutionTwo}
                           </Link>
                         </ListGroup.Item>
-                        {evolutionTwoExist && (
+                        {evolutionTwoExist && !hasVariety && (
                           <ListGroup.Item>
                             <Link to={`/pokemon/${urlThree}`}>
                               <Image
@@ -228,6 +251,26 @@ const Pokemon = () => {
                                 width='200px'
                               />
                               {evolutionThree}
+                            </Link>
+                          </ListGroup.Item>
+                        )}
+                        {hasVariety && (
+                          <ListGroup.Item>
+                            <Link to={`/pokemon/${urlThree}`}>
+                              <Image
+                                src={imgThree}
+                                alt={evolutionThree}
+                                width='100px'
+                              />
+                              {evolutionThree}
+                            </Link>
+                            <Link to={`/pokemon/${urlVariety}`}>
+                              <Image
+                                src={imgVariety}
+                                alt={evolutionVariety}
+                                width='100px'
+                              />
+                              {evolutionVariety}
                             </Link>
                           </ListGroup.Item>
                         )}
