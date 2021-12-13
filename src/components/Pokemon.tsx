@@ -76,6 +76,13 @@ const Pokemon = () => {
   let typeName = pokemonDetails.types && pokemonDetails.types[0].type.name;
   const bgColor: string = colors[typeName];
 
+  const evolutionExist = evolution.chain && evolution.chain.evolves_to[0];
+  const evolutionTwoExist =
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[0];
+  const noEvolution = evolution.chain && !evolution.chain.evolves_to.length;
+
   let evolutionOne = evolution.chain && evolution.chain.species.name;
   let urlOne =
     evolution.chain &&
@@ -83,9 +90,12 @@ const Pokemon = () => {
   let imgOne = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlOne}.png`;
 
   let evolutionTwo =
-    evolution.chain && evolution.chain.evolves_to[0].species.name;
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].species.name;
   let urlTwo =
     evolution.chain &&
+    evolution.chain.evolves_to[0] &&
     evolution.chain.evolves_to[0].species.url
       .substr(42)
       .replace('/', '')
@@ -93,9 +103,14 @@ const Pokemon = () => {
   let imgTwo = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlTwo}.png`;
 
   let evolutionThree =
-    evolution.chain && evolution.chain.evolves_to[0].evolves_to[0].species.name;
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[0].species.name;
   let urlThree =
     evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[0].species.url
       .substr(42)
       .replace('/', '')
@@ -172,40 +187,51 @@ const Pokemon = () => {
                         ))}
                     </ListGroup>
                   </Tab>
-                  <Tab eventKey='evolutions' title='Evolutions'>
-                    <ListGroup className='box--evolutions'>
-                      <ListGroup.Item>
-                        <Link to={`/pokemon/${1}`}>
-                          <Image
-                            src={imgOne}
-                            alt={evolutionOne}
-                            width='200px'
-                          />
-                          {evolutionOne}
-                        </Link>
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <Link to={`/pokemon/${2}`}>
-                          <Image
-                            src={imgTwo}
-                            alt={evolutionTwo}
-                            width='200px'
-                          />
-                          {evolutionTwo}
-                        </Link>
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <Link to={`/pokemon/${3}`}>
-                          <Image
-                            src={imgThree}
-                            alt={evolutionThree}
-                            width='200px'
-                          />
-                          {evolutionThree}
-                        </Link>
-                      </ListGroup.Item>
-                    </ListGroup>
-                  </Tab>
+                  {noEvolution && (
+                    <Tab
+                      eventKey='evolutions'
+                      title='Evolutions'
+                      disabled
+                    ></Tab>
+                  )}
+                  {evolutionExist && (
+                    <Tab eventKey='evolutions' title='Evolutions'>
+                      <ListGroup className='box--evolutions'>
+                        <ListGroup.Item>
+                          <Link to={`/pokemon/${1}`}>
+                            <Image
+                              src={imgOne}
+                              alt={evolutionOne}
+                              width='200px'
+                            />
+                            {evolutionOne}
+                          </Link>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          <Link to={`/pokemon/${2}`}>
+                            <Image
+                              src={imgTwo}
+                              alt={evolutionTwo}
+                              width='200px'
+                            />
+                            {evolutionTwo}
+                          </Link>
+                        </ListGroup.Item>
+                        {evolutionTwoExist && (
+                          <ListGroup.Item>
+                            <Link to={`/pokemon/${3}`}>
+                              <Image
+                                src={imgThree}
+                                alt={evolutionThree}
+                                width='200px'
+                              />
+                              {evolutionThree}
+                            </Link>
+                          </ListGroup.Item>
+                        )}
+                      </ListGroup>
+                    </Tab>
+                  )}
                 </Tabs>
               </Col>
             </Row>
