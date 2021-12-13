@@ -85,9 +85,9 @@ const Pokemon = () => {
 
   let evolutionOne = evolution.chain && evolution.chain.species.name;
   let urlOne =
-    evolution.chain &&
-    evolution.chain.species.url.substr(42).replace('/', '').padStart(3, '0');
-  let imgOne = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlOne}.png`;
+    evolution.chain && evolution.chain.species.url.substr(42).replace('/', '');
+  let imgUrlOne = evolution.chain && urlOne.padStart(3, '0');
+  let imgOne = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlOne}.png`;
 
   let evolutionTwo =
     evolution.chain &&
@@ -96,11 +96,9 @@ const Pokemon = () => {
   let urlTwo =
     evolution.chain &&
     evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].species.url
-      .substr(42)
-      .replace('/', '')
-      .padStart(3, '0');
-  let imgTwo = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlTwo}.png`;
+    evolution.chain.evolves_to[0].species.url.substr(42).replace('/', '');
+  let imgUrlTwo = evolution.chain && urlTwo.padStart(3, '0');
+  let imgTwo = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlTwo}.png`;
 
   let evolutionThree =
     evolution.chain &&
@@ -113,9 +111,13 @@ const Pokemon = () => {
     evolution.chain.evolves_to[0].evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[0].species.url
       .substr(42)
-      .replace('/', '')
-      .padStart(3, '0');
-  let imgThree = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${urlThree}.png`;
+      .replace('/', '');
+  let imgUrlThree =
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[0] &&
+    urlThree.padStart(3, '0');
+  let imgThree = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlThree}.png`;
 
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
@@ -198,7 +200,7 @@ const Pokemon = () => {
                     <Tab eventKey='evolutions' title='Evolutions'>
                       <ListGroup className='box--evolutions'>
                         <ListGroup.Item>
-                          <Link to={`/pokemon/${1}`}>
+                          <Link to={`/pokemon/${urlOne}`}>
                             <Image
                               src={imgOne}
                               alt={evolutionOne}
@@ -208,7 +210,7 @@ const Pokemon = () => {
                           </Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                          <Link to={`/pokemon/${2}`}>
+                          <Link to={`/pokemon/${urlTwo}`}>
                             <Image
                               src={imgTwo}
                               alt={evolutionTwo}
@@ -219,7 +221,7 @@ const Pokemon = () => {
                         </ListGroup.Item>
                         {evolutionTwoExist && (
                           <ListGroup.Item>
-                            <Link to={`/pokemon/${3}`}>
+                            <Link to={`/pokemon/${urlThree}`}>
                               <Image
                                 src={imgThree}
                                 alt={evolutionThree}
