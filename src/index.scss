@@ -113,6 +113,7 @@ body {
       }
       .nav-link {
         color: #000;
+        background-color: transparent;
         z-index: 20;
         &.disabled {
           color: #d3d3d3;
@@ -139,10 +140,13 @@ body {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        .list-group-item {
+        .list-group-item a {
           display: flex;
           flex-direction: column;
           text-align: center;
+          cursor: pointer;
+          text-decoration: none;
+          color: #000;
         }
       }
     }
