@@ -51,6 +51,9 @@ const Pokemon = () => {
   const chainUrl = species.evolution_chain && species.evolution_chain.url;
 
   useEffect(() => {
+    getPokemon(id);
+    getSpecies(id);
+
     const getEvolution = async () => {
       try {
         const res = await fetch(chainUrl);
@@ -61,12 +64,7 @@ const Pokemon = () => {
       }
     };
     getEvolution();
-  }, [chainUrl]);
-
-  useEffect(() => {
-    getPokemon(id);
-    getSpecies(id);
-  }, [id]);
+  }, [chainUrl, id]);
 
   let navigate = useNavigate();
   const handleClick = () => {
@@ -76,50 +74,17 @@ const Pokemon = () => {
   let typeName = pokemonDetails.types && pokemonDetails.types[0].type.name;
   const bgColor: string = colors[typeName];
 
+  const noEvolution = evolution.chain && !evolution.chain.evolves_to.length;
+  const hasVariety =
+    evolution.chain &&
+    evolution.chain.evolves_to[0] &&
+    evolution.chain.evolves_to[0].evolves_to[1];
+
   const evolutionExist = evolution.chain && evolution.chain.evolves_to[0];
   const evolutionTwoExist =
     evolution.chain &&
     evolution.chain.evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[0];
-  const hasVariety =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[1];
-  const noEvolution = evolution.chain && !evolution.chain.evolves_to.length;
-
-  const imgUrlOne =
-    evolution.chain &&
-    evolution.chain.species.url.substr(42).replace('/', '').padStart(3, '0');
-  const imgOne = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlOne}.png`;
-
-  const imgUrlTwo =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].species.url
-      .substr(42)
-      .replace('/', '')
-      .padStart(3, '0');
-  const imgTwo = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlTwo}.png`;
-
-  const imgUrlThree =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[0].species.url
-      .substr(42)
-      .replace('/', '')
-      .padStart(3, '0');
-  const imgThree = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlThree}.png`;
-
-  const imgUrlVariety =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[1] &&
-    evolution.chain.evolves_to[0].evolves_to[1].species.url
-      .substr(42)
-      .replace('/', '')
-      .padStart(3, '0');
-  const imgVariety = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlVariety}.png`;
 
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
@@ -208,7 +173,10 @@ const Pokemon = () => {
                               .replace('/', '')}`}
                           >
                             <Image
-                              src={imgOne}
+                              src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${evolution.chain.species.url
+                                .substr(42)
+                                .replace('/', '')
+                                .padStart(3, '0')}.png`}
                               alt={evolution.chain.species.name}
                               width='200px'
                             />
@@ -222,36 +190,17 @@ const Pokemon = () => {
                               .replace('/', '')}`}
                           >
                             <Image
-                              src={imgTwo}
+                              src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${evolution.chain.evolves_to[0].species.url
+                                .substr(42)
+                                .replace('/', '')
+                                .padStart(3, '0')}.png`}
                               alt={evolution.chain.evolves_to[0].species.name}
                               width='200px'
                             />
                             {evolution.chain.evolves_to[0].species.name}
                           </Link>
                         </ListGroup.Item>
-                        {evolutionTwoExist && !hasVariety && (
-                          <ListGroup.Item>
-                            <Link
-                              to={`/pokemon/${evolution.chain.evolves_to[0].evolves_to[0].species.url
-                                .substr(42)
-                                .replace('/', '')}`}
-                            >
-                              <Image
-                                src={imgThree}
-                                alt={
-                                  evolution.chain.evolves_to[0].evolves_to[0]
-                                    .species.name
-                                }
-                                width='200px'
-                              />
-                              {
-                                evolution.chain.evolves_to[0].evolves_to[0]
-                                  .species.name
-                              }
-                            </Link>
-                          </ListGroup.Item>
-                        )}
-                        {hasVariety && (
+                        {evolutionTwoExist && (
                           <ListGroup.Item>
                             {evolution.chain.evolves_to[0].evolves_to.map(
                               (pokemon: any, index: number) => (
@@ -262,9 +211,12 @@ const Pokemon = () => {
                                     .replace('/', '')}`}
                                 >
                                   <Image
-                                    src={imgThree}
+                                    src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.species.url
+                                      .substr(42)
+                                      .replace('/', '')
+                                      .padStart(3, '0')}.png`}
                                     alt={pokemon.species.name}
-                                    width='100px'
+                                    width={hasVariety ? '100px' : '200px'}
                                   />
                                   {pokemon.species.name}
                                 </Link>
