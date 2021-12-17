@@ -87,60 +87,39 @@ const Pokemon = () => {
     evolution.chain.evolves_to[0].evolves_to[1];
   const noEvolution = evolution.chain && !evolution.chain.evolves_to.length;
 
-  let evolutionOne = evolution.chain && evolution.chain.species.name;
-  let urlOne =
-    evolution.chain && evolution.chain.species.url.substr(42).replace('/', '');
-  let imgUrlOne = evolution.chain && urlOne.padStart(3, '0');
-  let imgOne = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlOne}.png`;
+  const imgUrlOne =
+    evolution.chain &&
+    evolution.chain.species.url.substr(42).replace('/', '').padStart(3, '0');
+  const imgOne = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlOne}.png`;
 
-  let evolutionTwo =
+  const imgUrlTwo =
     evolution.chain &&
     evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].species.name;
-  let urlTwo =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].species.url.substr(42).replace('/', '');
-  let imgUrlTwo = evolution.chain && urlTwo.padStart(3, '0');
-  let imgTwo = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlTwo}.png`;
+    evolution.chain.evolves_to[0].species.url
+      .substr(42)
+      .replace('/', '')
+      .padStart(3, '0');
+  const imgTwo = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlTwo}.png`;
 
-  let evolutionThree =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[0].species.name;
-  let urlThree =
+  const imgUrlThree =
     evolution.chain &&
     evolution.chain.evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[0].species.url
       .substr(42)
-      .replace('/', '');
-  let imgUrlThree =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[0] &&
-    urlThree.padStart(3, '0');
-  let imgThree = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlThree}.png`;
+      .replace('/', '')
+      .padStart(3, '0');
+  const imgThree = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlThree}.png`;
 
-  let evolutionVariety =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[1] &&
-    evolution.chain.evolves_to[0].evolves_to[1].species.name;
-  let urlVariety =
+  const imgUrlVariety =
     evolution.chain &&
     evolution.chain.evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[1] &&
     evolution.chain.evolves_to[0].evolves_to[1].species.url
       .substr(42)
-      .replace('/', '');
-  let imgUrlVariety =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[1] &&
-    urlVariety.padStart(3, '0');
-  let imgVariety = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlVariety}.png`;
+      .replace('/', '')
+      .padStart(3, '0');
+  const imgVariety = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${imgUrlVariety}.png`;
 
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
@@ -223,55 +202,74 @@ const Pokemon = () => {
                     <Tab eventKey='evolutions' title='Evolutions'>
                       <ListGroup className='box--evolutions'>
                         <ListGroup.Item>
-                          <Link to={`/pokemon/${urlOne}`}>
+                          <Link
+                            to={`/pokemon/${evolution.chain.species.url
+                              .substr(42)
+                              .replace('/', '')}`}
+                          >
                             <Image
                               src={imgOne}
-                              alt={evolutionOne}
+                              alt={evolution.chain.species.name}
                               width='200px'
                             />
-                            {evolutionOne}
+                            {evolution.chain.species.name}
                           </Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                          <Link to={`/pokemon/${urlTwo}`}>
+                          <Link
+                            to={`/pokemon/${evolution.chain.evolves_to[0].species.url
+                              .substr(42)
+                              .replace('/', '')}`}
+                          >
                             <Image
                               src={imgTwo}
-                              alt={evolutionTwo}
+                              alt={evolution.chain.evolves_to[0].species.name}
                               width='200px'
                             />
-                            {evolutionTwo}
+                            {evolution.chain.evolves_to[0].species.name}
                           </Link>
                         </ListGroup.Item>
                         {evolutionTwoExist && !hasVariety && (
                           <ListGroup.Item>
-                            <Link to={`/pokemon/${urlThree}`}>
+                            <Link
+                              to={`/pokemon/${evolution.chain.evolves_to[0].evolves_to[0].species.url
+                                .substr(42)
+                                .replace('/', '')}`}
+                            >
                               <Image
                                 src={imgThree}
-                                alt={evolutionThree}
+                                alt={
+                                  evolution.chain.evolves_to[0].evolves_to[0]
+                                    .species.name
+                                }
                                 width='200px'
                               />
-                              {evolutionThree}
+                              {
+                                evolution.chain.evolves_to[0].evolves_to[0]
+                                  .species.name
+                              }
                             </Link>
                           </ListGroup.Item>
                         )}
                         {hasVariety && (
                           <ListGroup.Item>
-                            <Link to={`/pokemon/${urlThree}`}>
-                              <Image
-                                src={imgThree}
-                                alt={evolutionThree}
-                                width='100px'
-                              />
-                              {evolutionThree}
-                            </Link>
-                            <Link to={`/pokemon/${urlVariety}`}>
-                              <Image
-                                src={imgVariety}
-                                alt={evolutionVariety}
-                                width='100px'
-                              />
-                              {evolutionVariety}
-                            </Link>
+                            {evolution.chain.evolves_to[0].evolves_to.map(
+                              (pokemon: any, index: number) => (
+                                <Link
+                                  key={index}
+                                  to={`/pokemon/${pokemon.species.url
+                                    .substr(42)
+                                    .replace('/', '')}`}
+                                >
+                                  <Image
+                                    src={imgThree}
+                                    alt={pokemon.species.name}
+                                    width='100px'
+                                  />
+                                  {pokemon.species.name}
+                                </Link>
+                              )
+                            )}
                           </ListGroup.Item>
                         )}
                       </ListGroup>
