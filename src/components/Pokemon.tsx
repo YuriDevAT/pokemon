@@ -86,6 +86,8 @@ const Pokemon = () => {
     evolution.chain.evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[0];
 
+  const isEevee = evolution.chain && evolution.chain.evolves_to.length > 1;
+
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
       {loading ? (
@@ -184,21 +186,26 @@ const Pokemon = () => {
                           </Link>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                          <Link
-                            to={`/pokemon/${evolution.chain.evolves_to[0].species.url
-                              .substr(42)
-                              .replace('/', '')}`}
-                          >
-                            <Image
-                              src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${evolution.chain.evolves_to[0].species.url
-                                .substr(42)
-                                .replace('/', '')
-                                .padStart(3, '0')}.png`}
-                              alt={evolution.chain.evolves_to[0].species.name}
-                              width='200px'
-                            />
-                            {evolution.chain.evolves_to[0].species.name}
-                          </Link>
+                          {evolution.chain.evolves_to.map(
+                            (pokemon: any, index: number) => (
+                              <Link
+                                key={index}
+                                to={`/pokemon/${pokemon.species.url
+                                  .substr(42)
+                                  .replace('/', '')}`}
+                              >
+                                <Image
+                                  src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.species.url
+                                    .substr(42)
+                                    .replace('/', '')
+                                    .padStart(3, '0')}.png`}
+                                  alt={pokemon.species.name}
+                                  width={isEevee ? '100px' : '200px'}
+                                />
+                                {pokemon.species.name}
+                              </Link>
+                            )
+                          )}
                         </ListGroup.Item>
                         {evolutionTwoExist && (
                           <ListGroup.Item>
