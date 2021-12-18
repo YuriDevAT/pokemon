@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Dosis&display=swap');
 $font-stack: 'Dosis', monospace;
+$primary-color: #333;
+$bg-color-light: #dae2f8;
+$bg-color-dark: #d6a4a4;
+$black: #000;
+$white: #fff;
+$dark-white: #cccccc;
+$red: #de1602;
+$glasmorphism: rgba(256, 256, 256, 0.4);
+$disabled: #d3d3d3;
+$box-shadow-light: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+$box-shadow-dark: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+  0 17px 50px 0 rgba(0, 0, 0, 0.19);
 
 * {
   box-sizing: border-box;
@@ -17,7 +30,7 @@ body {
   min-height: 100vh;
   width: 100vw;
   position: relative;
-  background-image: linear-gradient(to right, #dae2f8, #d6a4a4);
+  background-image: linear-gradient(to right, $bg-color-light, $bg-color-dark);
   .col {
     display: flex;
     justify-content: space-around;
@@ -25,11 +38,12 @@ body {
       width: '200px';
       border: none;
       margin-bottom: 25px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: $box-shadow-light;
       &:hover {
-        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-          0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: $box-shadow-dark;
+      }
+      img {
+        width: 215px;
       }
       .card-body {
         text-align: center;
@@ -37,9 +51,9 @@ body {
     }
     a {
       text-decoration: none;
-      color: black;
+      color: $black;
       &:hover {
-        color: black;
+        color: $black;
       }
     }
   }
@@ -93,7 +107,7 @@ body {
         border: none;
         width: 100px;
         margin: 5px 15px 0 0;
-        background-color: rgba(256, 256, 256, 0.4);
+        background-color: $glasmorphism;
       }
     }
     .details--img {
@@ -102,7 +116,7 @@ body {
       z-index: 1;
     }
     .box {
-      background-color: white;
+      background-color: $white;
       min-height: 450px;
       margin: -80px 0 20px;
       border-radius: 20px;
@@ -112,18 +126,18 @@ body {
         z-index: 2;
       }
       .nav-link {
-        color: #000;
+        color: $black;
         background-color: transparent;
         z-index: 20;
         &.disabled {
-          color: #d3d3d3;
+          color: $disabled;
         }
         &.active {
           font-weight: bold;
         }
       }
       .nav-link:hover {
-        color: #000;
+        color: $black;
       }
       .box--moves {
         display: flex;
@@ -135,7 +149,7 @@ body {
         background-color: none;
       }
       .box--evolutions {
-        height: 350px;
+        min-height: 350px;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -146,7 +160,7 @@ body {
           text-align: center;
           cursor: pointer;
           text-decoration: none;
-          color: #000;
+          color: $black;
         }
         .list-group-item:nth-child(2) {
           display: flex;
@@ -164,32 +178,33 @@ body {
       top: 290px;
       z-index: 50;
       transform: rotate(20deg);
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: $box-shadow-light;
     }
     .btn:hover {
       background-image: linear-gradient(
         180deg,
-        rgb(222, 22, 2) 50px,
-        rgb(0, 0, 0) 50px,
-        rgb(0, 0, 0) 60px,
-        rgb(255, 255, 255) 1px
+        $red 50px,
+        $black 50px,
+        $black 60px,
+        $white 1px
       );
+    }
+    .btn span {
+      font-size: 16px;
     }
     .btn:hover span {
       color: transparent;
     }
     .btn:hover::before {
       content: '';
-      background-color: white;
       height: 30px;
       width: 30px;
       position: absolute;
       top: 45px;
       left: 45px;
       border-radius: 50%;
-      border: solid 4px rgb(255, 255, 255);
-      background-color: rgb(204, 204, 204);
+      border: solid 4px $white;
+      background-color: $dark-white;
       box-shadow: 0px 0px 0px 4px;
     }
   }
