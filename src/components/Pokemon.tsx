@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { colors } from '../utils/bgColor';
 import {
   Button,
@@ -101,7 +101,7 @@ const Pokemon = () => {
           <Row>
             <Col className='details--header'>
               <h1>{pokemonDetails.name}</h1>
-              <h3>#{pokemonDetails.id.toString().padStart(3, '0')}</h3>
+              <h2>#{pokemonDetails.id.toString().padStart(3, '0')}</h2>
             </Col>
           </Row>
           <Row>
@@ -117,7 +117,8 @@ const Pokemon = () => {
             <Image
               src={pokemonDetails.image}
               alt={pokemonDetails.name}
-              width='350px'
+              width='200px'
+              height='200px'
               className='details--img'
             />
           </Row>
@@ -144,6 +145,8 @@ const Pokemon = () => {
                           <ProgressBar
                             now={stat.base_stat}
                             label={stat.base_stat}
+                            aria-labelledby='progressbar'
+                            aria-label='statistics'
                           />
                         </ListGroup.Item>
                       ))}
@@ -182,7 +185,8 @@ const Pokemon = () => {
                                 .replace('/', '')
                                 .padStart(3, '0')}.png`}
                               alt={evolution.chain.species.name}
-                              width='200px'
+                              width='150px'
+                              height='150px'
                             />
                             {evolution.chain.species.name}
                           </Link>
@@ -204,8 +208,13 @@ const Pokemon = () => {
                                   alt={pokemon.species.name}
                                   width={
                                     isEevee || hasTwoVarieties
-                                      ? '120px'
-                                      : '200px'
+                                      ? '100px'
+                                      : '150px'
+                                  }
+                                  height={
+                                    isEevee || hasTwoVarieties
+                                      ? '100px'
+                                      : '150px'
                                   }
                                 />
                                 {pokemon.species.name}
@@ -231,8 +240,13 @@ const Pokemon = () => {
                                     alt={pokemon.species.name}
                                     width={
                                       hasVariety || hasTwoVarieties
-                                        ? '120px'
-                                        : '200px'
+                                        ? '100px'
+                                        : '150px'
+                                    }
+                                    height={
+                                      hasVariety || hasTwoVarieties
+                                        ? '100px'
+                                        : '150px'
                                     }
                                   />
                                   {pokemon.species.name}
@@ -254,7 +268,8 @@ const Pokemon = () => {
                                     evolution.chain.evolves_to[1].evolves_to[0]
                                       .species.name
                                   }
-                                  width='120px'
+                                  width='100px'
+                                  height='100px'
                                 />
                                 {
                                   evolution.chain.evolves_to[1].evolves_to[0]
@@ -280,4 +295,4 @@ const Pokemon = () => {
   );
 };
 
-export default Pokemon;
+export default memo(Pokemon);

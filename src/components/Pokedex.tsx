@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ScrollArrow } from '../utils/scrollArrow';
 import { Container, Card, Col, Row, Spinner } from 'react-bootstrap';
@@ -36,10 +36,15 @@ const Pokedex = () => {
       ) : (
         <Row>
           {pokemon.map((pokemon: any, index: number) => (
-            <Col key={index} xs={12} sm={6} lg={4} xl={2} className='col'>
+            <Col key={index} xs={12} sm={6} lg={3} xl={2} className='col'>
               <Card>
                 <Link to={`/pokemon/${index + 1}`}>
-                  <Card.Img src={pokemon.image} alt={pokemon.name} />
+                  <Card.Img
+                    src={pokemon.image}
+                    alt={pokemon.name}
+                    width='180'
+                    height='180'
+                  />
                   <Card.Body>
                     <Card.Text>
                       #{(index + 1).toString().padStart(3, '0')}
@@ -57,4 +62,4 @@ const Pokedex = () => {
   );
 };
 
-export default Pokedex;
+export default memo(Pokedex);
