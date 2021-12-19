@@ -152,6 +152,7 @@ body {
         min-height: 350px;
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         .list-group-item a {
@@ -180,6 +181,18 @@ body {
       transform: rotate(20deg);
       box-shadow: $box-shadow-light;
     }
+    @media screen and (max-width: 860px) {
+      .btn {
+        right: 5px;
+      }
+    }
+    @media screen and (max-width: 480px) {
+      .btn {
+        right: 5px;
+        top: 50px;
+      }
+    }
+
     .btn:hover {
       background-image: linear-gradient(
         180deg,
