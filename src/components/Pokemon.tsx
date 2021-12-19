@@ -86,7 +86,9 @@ const Pokemon = () => {
     evolution.chain.evolves_to[0] &&
     evolution.chain.evolves_to[0].evolves_to[0];
 
-  const isEevee = evolution.chain && evolution.chain.evolves_to.length > 1;
+  const isEevee = evolution.chain && evolution.chain.evolves_to.length > 2;
+  const hasTwoVarieties =
+    evolution.chain && evolution.chain.evolves_to.length === 2;
 
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
@@ -185,7 +187,7 @@ const Pokemon = () => {
                             {evolution.chain.species.name}
                           </Link>
                         </ListGroup.Item>
-                        <ListGroup.Item>
+                        <ListGroup.Item className={isEevee ? 'isEevee' : ''}>
                           {evolution.chain.evolves_to.map(
                             (pokemon: any, index: number) => (
                               <Link
@@ -200,7 +202,11 @@ const Pokemon = () => {
                                     .replace('/', '')
                                     .padStart(3, '0')}.png`}
                                   alt={pokemon.species.name}
-                                  width={isEevee ? '100px' : '200px'}
+                                  width={
+                                    isEevee || hasTwoVarieties
+                                      ? '120px'
+                                      : '200px'
+                                  }
                                 />
                                 {pokemon.species.name}
                               </Link>
@@ -224,14 +230,16 @@ const Pokemon = () => {
                                       .padStart(3, '0')}.png`}
                                     alt={pokemon.species.name}
                                     width={
-                                      hasVariety || isEevee ? '100px' : '200px'
+                                      hasVariety || hasTwoVarieties
+                                        ? '120px'
+                                        : '200px'
                                     }
                                   />
                                   {pokemon.species.name}
                                 </Link>
                               )
                             )}
-                            {isEevee && (
+                            {hasTwoVarieties && (
                               <Link
                                 to={`/pokemon/${evolution.chain.evolves_to[1].evolves_to[0].species.url
                                   .substr(42)
@@ -246,7 +254,7 @@ const Pokemon = () => {
                                     evolution.chain.evolves_to[1].evolves_to[0]
                                       .species.name
                                   }
-                                  width='100px'
+                                  width='120px'
                                 />
                                 {
                                   evolution.chain.evolves_to[1].evolves_to[0]
