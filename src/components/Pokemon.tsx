@@ -223,11 +223,36 @@ const Pokemon = () => {
                                       .replace('/', '')
                                       .padStart(3, '0')}.png`}
                                     alt={pokemon.species.name}
-                                    width={hasVariety ? '100px' : '200px'}
+                                    width={
+                                      hasVariety || isEevee ? '100px' : '200px'
+                                    }
                                   />
                                   {pokemon.species.name}
                                 </Link>
                               )
+                            )}
+                            {isEevee && (
+                              <Link
+                                to={`/pokemon/${evolution.chain.evolves_to[1].evolves_to[0].species.url
+                                  .substr(42)
+                                  .replace('/', '')}`}
+                              >
+                                <Image
+                                  src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${evolution.chain.evolves_to[1].evolves_to[0].species.url
+                                    .substr(42)
+                                    .replace('/', '')
+                                    .padStart(3, '0')}.png`}
+                                  alt={
+                                    evolution.chain.evolves_to[1].evolves_to[0]
+                                      .species.name
+                                  }
+                                  width='100px'
+                                />
+                                {
+                                  evolution.chain.evolves_to[1].evolves_to[0]
+                                    .species.name
+                                }
+                              </Link>
                             )}
                           </ListGroup.Item>
                         )}
