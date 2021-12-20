@@ -143,10 +143,9 @@ const Pokemon = () => {
                         <ListGroup.Item key={index}>
                           {stat.stat.name}
                           <ProgressBar
-                            now={stat.base_stat}
+                            aria-valuenow={stat.base_stat}
                             label={stat.base_stat}
-                            aria-labelledby='progressbar'
-                            aria-label='statistics'
+                            role='progressbar'
                           />
                         </ListGroup.Item>
                       ))}
