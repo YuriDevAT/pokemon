@@ -97,18 +97,20 @@ const Pokemon = () => {
           <span className='visually-hidden'>Fetching Pokemon...</span>
         </Spinner>
       ) : (
-        <div className='details' style={{ position: 'relative' }}>
+        <div className='pokemon__details' style={{ position: 'relative' }}>
           <Row>
-            <Col className='details--header'>
+            <Col className='pokemon__header'>
               <h1>{pokemonDetails.name}</h1>
               <h2>#{pokemonDetails.id.toString().padStart(3, '0')}</h2>
             </Col>
           </Row>
           <Row>
             <Col>
-              <ListGroup className='details--type'>
+              <ListGroup className='pokemon__type'>
                 {pokemonDetails.types.map((type: any, index: number) => (
-                  <ListGroup.Item key={index}>{type.type.name}</ListGroup.Item>
+                  <ListGroup.Item key={index} className='pokemon__type-list'>
+                    {type.type.name}
+                  </ListGroup.Item>
                 ))}
               </ListGroup>
             </Col>
@@ -119,13 +121,13 @@ const Pokemon = () => {
               alt={pokemonDetails.name}
               width='200px'
               height='200px'
-              className='details--img'
+              className='pokemon__image'
             />
           </Row>
           <TabContainer>
             <Row className='clearfix'>
               <Col sm={12} className='box'>
-                <Tabs defaultActiveKey='stats'>
+                <Tabs defaultActiveKey='stats' className='box__navbar'>
                   <Tab eventKey='abilities' title='Abilities'>
                     <ListGroup>
                       {pokemonDetails.abilities.map(
@@ -143,20 +145,24 @@ const Pokemon = () => {
                         <ListGroup.Item key={index}>
                           {stat.stat.name}
                           <ProgressBar
-                            aria-valuenow={stat.base_stat}
+                            aria-valuetext={stat.base_stat}
                             label={stat.base_stat}
                             role='progressbar'
+                            now={stat.base_stat}
                           />
                         </ListGroup.Item>
                       ))}
                     </ListGroup>
                   </Tab>
                   <Tab eventKey='moves' title='Moves'>
-                    <ListGroup className='box--moves'>
+                    <ListGroup className='box__moves'>
                       {pokemonDetails.moves
                         .slice(0, 62)
                         .map((move: any, index: number) => (
-                          <ListGroup.Item key={index}>
+                          <ListGroup.Item
+                            key={index}
+                            className='box__moves-list'
+                          >
                             {move.move.name}
                           </ListGroup.Item>
                         ))}
@@ -171,12 +177,13 @@ const Pokemon = () => {
                   )}
                   {evolutionExist && (
                     <Tab eventKey='evolutions' title='Evolutions'>
-                      <ListGroup className='box--evolutions'>
+                      <ListGroup className='box__evolutions'>
                         <ListGroup.Item>
                           <Link
                             to={`/pokemon/${evolution.chain.species.url
                               .substr(42)
                               .replace('/', '')}`}
+                            className='box__evolution-link'
                           >
                             <Image
                               src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${evolution.chain.species.url
@@ -190,7 +197,9 @@ const Pokemon = () => {
                             {evolution.chain.species.name}
                           </Link>
                         </ListGroup.Item>
-                        <ListGroup.Item className={isEevee ? 'isEevee' : ''}>
+                        <ListGroup.Item
+                          className={isEevee ? 'box__evolution-isEevee' : ''}
+                        >
                           {evolution.chain.evolves_to.map(
                             (pokemon: any, index: number) => (
                               <Link
@@ -198,6 +207,7 @@ const Pokemon = () => {
                                 to={`/pokemon/${pokemon.species.url
                                   .substr(42)
                                   .replace('/', '')}`}
+                                className='box__evolution-link'
                               >
                                 <Image
                                   src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.species.url
@@ -285,8 +295,8 @@ const Pokemon = () => {
               </Col>
             </Row>
           </TabContainer>
-          <Button variant='dark' onClick={handleClick}>
-            <span>Catch another Pokémon</span>
+          <Button variant='dark' onClick={handleClick} className='button'>
+            <span className='button__span'>Catch another Pokémon</span>
           </Button>
         </div>
       )}

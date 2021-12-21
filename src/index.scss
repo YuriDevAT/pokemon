@@ -1,3 +1,5 @@
+@import '~bootstrap/scss/bootstrap';
+
 $font-stack: 'Dosis', monospace;
 $primary-color: #333;
 $bg-color-light: #dae2f8;
@@ -30,39 +32,40 @@ body {
   width: 100vw;
   position: relative;
   background-image: linear-gradient(to right, $bg-color-light, $bg-color-dark);
-  .col {
+  &__col {
     display: flex;
     justify-content: space-around;
-    .card {
-      min-width: 180px;
-      text-align: center;
-      border: none;
-      margin-bottom: 25px;
-      box-shadow: $box-shadow-light;
-      &:hover {
-        box-shadow: $box-shadow-dark;
-      }
-    }
-    a,
-    a:hover {
-      text-decoration: none;
-      color: $black;
+  }
+  &__card {
+    min-width: 180px;
+    text-align: center;
+    border: none;
+    margin-bottom: 25px;
+    box-shadow: $box-shadow-light;
+    &:hover {
+      box-shadow: $box-shadow-dark;
     }
   }
-  .scrollTop {
-    position: fixed;
-    font-size: 60px;
-    right: 20px;
-    bottom: 20px;
-    align-items: flex-end;
-    z-index: 1000;
-    cursor: pointer;
-    animation: fadeIn 0.5s;
-    transition: opacity 0.4s;
-    opacity: 0.5;
-    &:hover {
-      opacity: 1;
-    }
+  &__link,
+  &__link:hover {
+    text-decoration: none;
+    color: $black;
+  }
+}
+
+.scrollTop {
+  position: fixed;
+  font-size: 60px;
+  right: 20px;
+  bottom: 20px;
+  align-items: flex-end;
+  z-index: 1000;
+  cursor: pointer;
+  animation: fadeIn 0.5s;
+  transition: opacity 0.4s ease-in;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
   }
 }
 @keyframes fadeIn {
@@ -80,135 +83,137 @@ body {
   width: 100%;
   padding: 15px;
   position: relative;
-  .details {
+  &__details {
     max-width: 700px;
     margin: 0 auto;
-    .details--header {
-      padding-top: 15px;
-      display: flex;
-      justify-content: space-between;
+  }
+  &__header {
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__type {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: -20px;
+  }
+  &__type-list {
+    border-radius: 15px;
+    border: none;
+    width: 100px;
+    margin: 5px 15px 0 0;
+    background-color: $glasmorphism;
+  }
+  &__image {
+    height: 200px;
+    width: auto;
+    margin: 0 auto;
+    z-index: 1;
+  }
+}
+.box {
+  background-color: $white;
+  min-height: 420px;
+  margin: -60px 0 20px;
+  border-radius: 20px;
+  &__navbar {
+    margin: 35px 0 10px;
+    position: relative;
+    z-index: 2;
+  }
+  .nav-link,
+  .nav-link:hover {
+    color: $black;
+    background-color: transparent;
+    z-index: 20;
+    &.disabled {
+      color: $disabled;
     }
-    .details--type {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      text-align: center;
-      margin-bottom: -20px;
-      .list-group-item {
-        border-radius: 15px;
-        border: none;
-        width: 100px;
-        margin: 5px 15px 0 0;
-        background-color: $glasmorphism;
-      }
+    &.active {
+      font-weight: bold;
     }
-    .details--img {
-      height: 200px;
-      width: auto;
-      margin: 0 auto;
-      z-index: 1;
-    }
-    .box {
-      background-color: $white;
-      min-height: 420px;
-      margin: -60px 0 20px;
-      border-radius: 20px;
-      .nav {
-        margin: 35px 0 10px;
-        position: relative;
-        z-index: 2;
-      }
-      .nav-link,
-      .nav-link:hover {
-        color: $black;
-        background-color: transparent;
-        z-index: 20;
-        &.disabled {
-          color: $disabled;
-        }
-        &.active {
-          font-weight: bold;
-        }
-      }
-      .box--moves {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-      .list-group-item {
-        border: none;
-        background-color: none;
-      }
-      .box--evolutions {
-        min-height: 300px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        .list-group-item a {
-          display: flex;
-          flex-direction: column;
-          text-align: center;
-          cursor: pointer;
-          text-decoration: none;
-          color: $black;
-        }
-        .isEevee {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-around;
-        }
-      }
-    }
-    .btn {
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-      position: absolute;
-      right: -35px;
-      top: 160px;
-      z-index: 50;
-      transform: rotate(20deg);
-      box-shadow: $box-shadow-light;
-    }
-    @media screen and (max-width: 860px) {
-      .btn {
-        right: 5px;
-      }
-    }
-    @media screen and (max-width: 480px) {
-      .btn {
-        top: 50px;
-      }
-    }
+  }
+  &__moves {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  &__moves-list,
+  .list-group-item {
+    border: none;
+    background-color: none;
+  }
+  &__evolutions {
+    min-height: 300px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .list-group-item a {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: $black;
+  }
+  &__evolution-isEevee {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
 
-    .btn:hover {
-      background-image: linear-gradient(
-        180deg,
-        $red 50px,
-        $black 50px,
-        $black 60px,
-        $white 1px
-      );
-    }
-    .btn span {
-      font-size: 16px;
-    }
-    .btn:hover span {
-      color: transparent;
-    }
-    .btn:hover::before {
-      content: '';
-      height: 30px;
-      width: 30px;
-      position: absolute;
-      top: 45px;
-      left: 45px;
-      border-radius: 50%;
-      border: solid 4px $white;
-      background-color: $dark-white;
-      box-shadow: 0px 0px 0px 4px;
-    }
+.button {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  right: -35px;
+  top: 160px;
+  z-index: 50;
+  transform: rotate(20deg);
+  box-shadow: $box-shadow-light;
+  &:hover {
+    background-image: linear-gradient(
+      180deg,
+      $red 50px,
+      $black 50px,
+      $black 60px,
+      $white 1px
+    );
+  }
+  &:hover::before {
+    content: '';
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 45px;
+    left: 45px;
+    border-radius: 50%;
+    border: solid 4px $white;
+    background-color: $dark-white;
+    box-shadow: 0px 0px 0px 4px;
+  }
+  &__span {
+    font-size: 16px;
+  }
+  &:hover &__span {
+    color: transparent;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .button {
+    right: 5px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .button {
+    top: 50px;
   }
 }
