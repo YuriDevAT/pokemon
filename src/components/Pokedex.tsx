@@ -69,4 +69,4 @@ const Pokedex = () => {
   );
 };
 
-export default memo(Pokedex);
+export default Pokedex;

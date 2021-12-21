@@ -145,10 +145,12 @@ const Pokemon = () => {
                         <ListGroup.Item key={index}>
                           {stat.stat.name}
                           <ProgressBar
-                            aria-valuetext={stat.base_stat}
                             label={stat.base_stat}
                             role='progressbar'
                             now={stat.base_stat}
+                            aria-label='stats values'
+                            aria-labelledby={stat.stat.name}
+                            title='Stats values'
                           />
                         </ListGroup.Item>
                       ))}
@@ -304,4 +306,4 @@ const Pokemon = () => {
   );
 };
 
-export default memo(Pokemon);
+export default Pokemon;
