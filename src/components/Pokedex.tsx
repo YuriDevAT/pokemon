@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ScrollArrow } from '../utils/scrollArrow';
 import { Container, Card, Col, Row, Spinner } from 'react-bootstrap';
