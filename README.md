@@ -39,9 +39,11 @@ Four examples will demonstrate these differences:
 
 - Pokemon [115: Kangaskhan](https://pokemon25.netlify.app/pokemon/265), which
   does not have an evolution. Therefore, the tab is disabled.
+  
   <img width="400" src="https://github.com/YuriDevAT/pokemon/blob/master/public/images/kangaskhan.png" />
 - Pokemon [133: Eevee](https://pokemon25.netlify.app/pokemon/133), whish has
   several evolutions depending on which stone is used to force an evolution.
+  
   <img width="400" src="https://github.com/YuriDevAT/pokemon/blob/master/public/images/eevee.png" />
 - Pokemon [265: Wurmple](https://pokemon25.netlify.app/pokemon/265), which has
   two different first evolutions (depending on their nature) which then evolutes to
@@ -50,6 +52,7 @@ Four examples will demonstrate these differences:
   <img width="400" src="https://github.com/YuriDevAT/pokemon/blob/master/public/images/wurmple.png" />
 - Pokemon [280: Ralts](https://pokemon25.netlify.app/pokemon/280), which has two
   different second evolution depending on its nature.
+  
   <img width="400" src="https://github.com/YuriDevAT/pokemon/blob/master/public/images/ralts.png" />
 
 There may be other Pokemon with other kind of singularities which I am not aware
