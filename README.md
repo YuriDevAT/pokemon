@@ -18,6 +18,14 @@ like stats, moves, abilities, types and their evolution, fetched from different
 API links. Depending of the type ofthe clicked Pokemon the background color is
 customized.
 
+Used API links:
+- https://pokeapi.co/api/v2/pokemon?limit=898 to fetch all Pokemon
+- https://pokeapi.co/api/v2/pokemon/${id} to fetch an individual Pokemon by its id
+- https://pokeapi.co/api/v2/pokemon-species/${id} to fetch an individual Pokemon by its id
+- https://pokeapi.co/api/v2/evolution-chain/${id}/ to fetch the evolution chain of each pokemon
+- https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png to fetch img of each pokemon
+
+
 ## Live view of the app
 
 The app was deployed with Netlify. Follow the link to check out the app:
