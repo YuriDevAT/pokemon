@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { colors } from '../utils/bgColor';
 import {
   Button,
@@ -48,7 +48,7 @@ const Pokemon = () => {
     }
   };
 
-  const chainUrl = species.evolution_chain && species.evolution_chain.url;
+  const chainUrl = species.evolution_chain?.url;
 
   useEffect(() => {
     getPokemon(id);
@@ -71,24 +71,17 @@ const Pokemon = () => {
     navigate('/');
   };
 
-  let typeName = pokemonDetails.types && pokemonDetails.types[0].type.name;
+  let typeName = pokemonDetails.types?.[0].type.name;
   const bgColor: string = colors[typeName];
 
   const noEvolution = evolution.chain && !evolution.chain.evolves_to.length;
-  const hasVariety =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[1];
+  const hasVariety = evolution.chain?.evolves_to[0]?.evolves_to[1];
 
-  const evolutionExist = evolution.chain && evolution.chain.evolves_to[0];
-  const evolutionTwoExist =
-    evolution.chain &&
-    evolution.chain.evolves_to[0] &&
-    evolution.chain.evolves_to[0].evolves_to[0];
+  const evolutionExist = evolution.chain?.evolves_to[0];
+  const evolutionTwoExist = evolution.chain?.evolves_to[0]?.evolves_to[0];
 
-  const isEevee = evolution.chain && evolution.chain.evolves_to.length > 2;
-  const hasTwoVarieties =
-    evolution.chain && evolution.chain.evolves_to.length === 2;
+  const isEevee = evolution.chain?.evolves_to.length > 2;
+  const hasTwoVarieties = evolution.chain?.evolves_to.length === 2;
 
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
