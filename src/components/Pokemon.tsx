@@ -83,6 +83,8 @@ const Pokemon = () => {
   const isEevee = evolution.chain?.evolves_to.length > 2;
   const hasTwoVarieties = evolution.chain?.evolves_to.length === 2;
 
+  const eeveeClass = isEevee ? 'box__evolution-isEevee' : '';
+
   return (
     <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
       {loading ? (
@@ -192,9 +194,7 @@ const Pokemon = () => {
                             {evolution.chain.species.name}
                           </Link>
                         </ListGroup.Item>
-                        <ListGroup.Item
-                          className={isEevee ? 'box__evolution-isEevee' : ''}
-                        >
+                        <ListGroup.Item className={eeveeClass}>
                           {evolution.chain.evolves_to.map(
                             (pokemon: any, index: number) => (
                               <Link
