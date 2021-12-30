@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowUpCircleFill } from 'react-bootstrap-icons';
 
-export const ScrollArrow = () => {
+const ScrollArrow = () => {
   const [showScroll, setShowScroll] = useState(false);
 
   const scrollTop = () => {
@@ -30,3 +30,5 @@ export const ScrollArrow = () => {
     />
   );
 };
+
+export default ScrollArrow;
