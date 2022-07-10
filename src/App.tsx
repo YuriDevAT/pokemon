@@ -1,19 +1,16 @@
-import { lazy, Suspense } from 'react';
+import React from 'react';
+import Pokedex from './components/Pokedex';
+//import Pokemon from './components/Pokemon';
+import ErrorPage from './components/ErrorPage';
 import { Route, Routes } from 'react-router-dom';
-
-const Pokedex = lazy(() => import('./components/Pokedex'));
-const Pokemon = lazy(() => import('./components/Pokemon'));
-
-const renderLoader = () => <p>Loading</p>;
 
 function App() {
   return (
-    <Suspense fallback={renderLoader()}>
-      <Routes>
-        <Route path='/' element={<Pokedex />} />
-        <Route path='/pokemon/:id' element={<Pokemon />} />
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route path='/' element={<Pokedex />} />
+      {/* <Route path='/pokemon/:id' element={<Pokemon />} /> */}
+      <Route path="/pokemon_escaped" element={<ErrorPage />} />
+    </Routes>
   );
 }
 

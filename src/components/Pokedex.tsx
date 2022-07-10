@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollArrow from './ScrollArrow';
@@ -51,6 +52,7 @@ const Pokedex = () => {
                     alt={pokemon.name}
                     width='180'
                     height='180'
+                    loading='lazy'
                   />
                   <Card.Body>
                     <Card.Text>
