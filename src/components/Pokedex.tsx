@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollArrow from './ScrollArrow';
-import { Container, Card, Col, Row, Spinner } from 'react-bootstrap';
 
 const Pokedex = () => {
   const [pokemon, setPokemon] = useState([]);

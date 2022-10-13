@@ -1,18 +1,5 @@
 import { useEffect, useState } from 'react';
 import { colors } from '../utils/bgColor';
-import {
-  Button,
-  Col,
-  Container,
-  Image,
-  Row,
-  Spinner,
-  ListGroup,
-  ProgressBar,
-  Tab,
-  Tabs,
-  TabContainer,
-} from 'react-bootstrap';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Pokemon = () => {
