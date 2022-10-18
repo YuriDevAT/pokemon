@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpCircleFill } from 'react-bootstrap-icons';
 
 const ScrollArrow = () => {
   const [showScroll, setShowScroll] = useState(false);
@@ -21,13 +20,14 @@ const ScrollArrow = () => {
   }, [showScroll]);
 
   return (
-    <ArrowUpCircleFill
+    <div
       role='button'
       className='scrollTop'
       onClick={scrollTop}
       onKeyDown={scrollTop}
-      style={{ display: showScroll ? 'flex' : 'none' }}
-    />
+      style={{ display: showScroll ? 'flex' : 'none' }}>
+
+    </div>
   );
 };
 

@@ -73,103 +73,99 @@ const Pokemon = () => {
   const eeveeClass = isEevee ? 'box__evolution-isEevee' : '';
 
   return (
-    <Container fluid className='pokemon' style={{ backgroundColor: bgColor }}>
+    <div className='pokemon' style={{ backgroundColor: bgColor }}>
       {loading ? (
-        <Spinner animation='border' role='status'>
+        <div role='status'>
           <span className='visually-hidden'>Fetching Pokemon...</span>
-        </Spinner>
+        </div>
       ) : (
         <div className='pokemon__details' style={{ position: 'relative' }}>
-          <Row>
-            <Col className='pokemon__header'>
+          <div>
+            <div className='pokemon__header'>
               <h1>{pokemonDetails.name}</h1>
               <h2>#{pokemonDetails.id.toString().padStart(3, '0')}</h2>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <ListGroup className='pokemon__type'>
+            </div>
+          </div>
+          <div>
+            <div>
+              <div className='pokemon__type'>
                 {pokemonDetails.types.map((type: any, index: number) => (
-                  <ListGroup.Item key={index} className='pokemon__type-list'>
+                  <div key={index} className='pokemon__type-list'>
                     {type.type.name}
-                  </ListGroup.Item>
+                  </div>
                 ))}
-              </ListGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Image
+              </div>
+            </div>
+          </div>
+          <div>
+            <img
               src={pokemonDetails.image}
               alt={pokemonDetails.name}
               width='200px'
               height='200px'
               className='pokemon__image'
             />
-          </Row>
-          <TabContainer>
-            <Row className='clearfix'>
-              <Col sm={12} className='box'>
-                <Tabs defaultActiveKey='stats' className='box__navbar'>
-                  <Tab eventKey='abilities' title='Abilities'>
-                    <ListGroup>
+          </div>
+          <div>
+            <div className='clearfix'>
+              <div className='box'>
+                <div className='box__navbar'>
+                  <div title='Abilities'>
+                    <div>
                       {pokemonDetails.abilities.map(
                         (ability: any, index: number) => (
-                          <ListGroup.Item key={index}>
+                          <div key={index}>
                             {ability.ability.name}
-                          </ListGroup.Item>
+                          </div>
                         )
                       )}
-                    </ListGroup>
-                  </Tab>
-                  <Tab eventKey='stats' title='Stats'>
-                    <ListGroup>
+                    </div>
+                  </div>
+                  <div title='Stats'>
+                    <div>
                       {pokemonDetails.stats.map((stat: any, index: number) => (
-                        <ListGroup.Item key={index}>
+                        <div key={index}>
                           {stat.stat.name}
-                          <ProgressBar
-                            label={stat.base_stat}
+                          <div
                             role='progressbar'
-                            now={stat.base_stat}
                             aria-label='stats values'
                             aria-labelledby={stat.stat.name}
                             title='Stats values'
                           />
-                        </ListGroup.Item>
+                        </div>
                       ))}
-                    </ListGroup>
-                  </Tab>
-                  <Tab eventKey='moves' title='Moves'>
-                    <ListGroup className='box__moves'>
+                    </div>
+                  </div>
+                  <div title='Moves'>
+                    <div className='box__moves'>
                       {pokemonDetails.moves
                         .slice(0, 62)
                         .map((move: any, index: number) => (
-                          <ListGroup.Item
+                          <div
                             key={index}
                             className='box__moves-list'
                           >
                             {move.move.name}
-                          </ListGroup.Item>
+                          </div>
                         ))}
-                    </ListGroup>
-                  </Tab>
+                    </div>
+                  </div>
                   {noEvolution && (
-                    <Tab
-                      eventKey='evolutions'
+                    <div
                       title='Evolutions'
-                      disabled
-                    ></Tab>
+                    ></div>
                   )}
                   {evolutionExist && (
-                    <Tab eventKey='evolutions' title='Evolutions'>
-                      <ListGroup className='box__evolutions'>
-                        <ListGroup.Item>
+                    <div title='Evolutions'>
+                      <div className='box__evolutions'>
+                        <div>
                           <Link
                             to={`/pokemon/${evolution.chain.species.url
                               .substr(42)
                               .replace('/', '')}`}
                             className='box__evolution-link'
                           >
-                            <Image
+                            <img
                               src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${evolution.chain.species.url
                                 .substr(42)
                                 .replace('/', '')
@@ -180,8 +176,8 @@ const Pokemon = () => {
                             />
                             {evolution.chain.species.name}
                           </Link>
-                        </ListGroup.Item>
-                        <ListGroup.Item className={eeveeClass}>
+                        </div>
+                        <div className={eeveeClass}>
                           {evolution.chain.evolves_to.map(
                             (pokemon: any, index: number) => (
                               <Link
@@ -191,7 +187,7 @@ const Pokemon = () => {
                                   .replace('/', '')}`}
                                 className='box__evolution-link'
                               >
-                                <Image
+                                <img
                                   src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.species.url
                                     .substr(42)
                                     .replace('/', '')
@@ -212,9 +208,9 @@ const Pokemon = () => {
                               </Link>
                             )
                           )}
-                        </ListGroup.Item>
+                        </div>
                         {evolutionTwoExist && (
-                          <ListGroup.Item>
+                          <div>
                             {evolution.chain.evolves_to[0].evolves_to.map(
                               (pokemon: any, index: number) => (
                                 <Link
@@ -223,7 +219,7 @@ const Pokemon = () => {
                                     .substr(42)
                                     .replace('/', '')}`}
                                 >
-                                  <Image
+                                  <img
                                     src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.species.url
                                       .substr(42)
                                       .replace('/', '')
@@ -250,7 +246,7 @@ const Pokemon = () => {
                                   .substr(42)
                                   .replace('/', '')}`}
                               >
-                                <Image
+                                <img
                                   src={`https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${evolution.chain.evolves_to[1].evolves_to[0].species.url
                                     .substr(42)
                                     .replace('/', '')
@@ -268,21 +264,21 @@ const Pokemon = () => {
                                 }
                               </Link>
                             )}
-                          </ListGroup.Item>
+                          </div>
                         )}
-                      </ListGroup>
-                    </Tab>
+                      </div>
+                    </div>
                   )}
-                </Tabs>
-              </Col>
-            </Row>
-          </TabContainer>
-          <Button variant='dark' onClick={handleClick} className='button'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button onClick={handleClick} className='button'>
             <span className='button__span'>Catch another Pokémon</span>
-          </Button>
+          </button>
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 

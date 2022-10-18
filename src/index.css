@@ -1,26 +1,29 @@
-@import '~bootstrap/scss/bootstrap';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-$font-stack: 'Dosis', monospace;
-$primary-color: #333;
-$bg-color-light: #dae2f8;
-$bg-color-dark: #d6a4a4;
-$black: #000;
-$white: #fff;
-$dark-white: #cccccc;
-$red: #de1602;
-$glasmorphism: rgba(256, 256, 256, 0.4);
-$disabled: #d3d3d3;
-$box-shadow-light: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-  0 6px 20px 0 rgba(0, 0, 0, 0.19);
-$box-shadow-dark: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-  0 17px 50px 0 rgba(0, 0, 0, 0.19);
+root {
+  --primary-color: #333;
+  --bg-color-light: #dae2f8;
+  --bg-color-dark: #d6a4a4;
+  --black: #000;
+  --white: #fff;
+  --dark-white: #cccccc;
+  --red: #de1602;
+  --glasmorphism: rgba(256, 256, 256, 0.4);
+  --disabled: #d3d3d3;
+  --box-shadow-light: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  --box-shadow-dark: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font: 16px $font-stack;
+  font: 16px 'Dosis';
   margin: 0;
   height: 100%;
   text-transform: capitalize;
@@ -31,26 +34,31 @@ body {
   min-height: 100vh;
   width: 100vw;
   position: relative;
-  background-image: linear-gradient(to right, $bg-color-light, $bg-color-dark);
-  &__col {
-    display: flex;
-    justify-content: space-around;
-  }
-  &__card {
-    min-width: 180px;
-    text-align: center;
-    border: none;
-    margin-bottom: 25px;
-    box-shadow: $box-shadow-light;
-    &:hover {
-      box-shadow: $box-shadow-dark;
-    }
-  }
-  &__link,
-  &__link:hover {
-    text-decoration: none;
-    color: $black;
-  }
+  background-image: linear-gradient(to right, var(--bg-color-light), var(--bg-color-dark));
+}
+
+.pokedex__col {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pokedex__card {
+  min-width: 180px;
+  text-align: center;
+  border: none;
+  margin-bottom: 25px;
+  box-shadow: var(--box-shadow-light);
+}
+
+.pokedex__card:hover {
+  box-shadow: var(--box-shadow-dark);
+}
+
+
+.pokedex__link,
+.pokedex__link:hover {
+  text-decoration: none;
+  color: var(--black);
 }
 
 .scrollTop {
@@ -64,14 +72,17 @@ body {
   animation: fadeIn 0.5s;
   transition: opacity 0.4s ease-in;
   opacity: 0.5;
-  &:hover {
-    opacity: 1;
-  }
 }
+
+.scrollTop:hover {
+  opacity: 1;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 0.5;
   }
@@ -83,89 +94,104 @@ body {
   width: 100%;
   padding: 15px;
   position: relative;
-  &__details {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  &__header {
-    padding-top: 15px;
-    display: flex;
-    justify-content: space-between;
-  }
-  &__type {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    text-align: center;
-    margin-bottom: -20px;
-  }
-  &__type-list {
-    border-radius: 15px !important;
-    border: none;
-    width: 100px;
-    margin: 5px 15px 0 0;
-    background-color: $glasmorphism;
-  }
-  &__image {
-    height: 200px;
-    width: auto;
-    margin: 0 auto;
-    z-index: 1;
-  }
 }
+
+.pokemon__details {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.pokemon__header {
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pokemon__type {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-bottom: -20px;
+}
+
+.pokemon__type-list {
+  border-radius: 15px !important;
+  border: none;
+  width: 100px;
+  margin: 5px 15px 0 0;
+  background-color: var(--glasmorphism);
+}
+
+.pokemon__image {
+  height: 200px;
+  width: auto;
+  margin: 0 auto;
+  z-index: 1;
+}
+
 .box {
-  background-color: $white;
+  background-color: var(--white);
   min-height: 420px;
   margin: -60px 0 20px;
   border-radius: 20px;
-  &__navbar {
-    margin: 35px 0 10px;
-    position: relative;
-    z-index: 2;
-  }
-  .nav-link,
-  .nav-link:hover {
-    color: $black;
-    background-color: transparent;
-    z-index: 20;
-    &.disabled {
-      color: $disabled;
-    }
-    &.active {
-      font-weight: bold;
-    }
-  }
-  &__moves {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  &__moves-list,
-  .list-group-item {
-    border: none;
-    background-color: none;
-  }
-  &__evolutions {
-    min-height: 300px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  .list-group-item a {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-    color: $black;
-  }
-  &__evolution-isEevee {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
+}
+
+.box__navbar {
+  margin: 35px 0 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.nav-link,
+.nav-link:hover {
+  color: var(--black);
+  background-color: transparent;
+  z-index: 20;
+}
+
+.nav-link.disabled {
+  color: var(--disabled);
+}
+
+.nav-link.active {
+  font-weight: bold;
+}
+
+.nav-link__moves {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.nav-link__moves-list,
+.list-group-item {
+  border: none;
+  background-color: none;
+}
+
+.nav-link__evolutions {
+  min-height: 300px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-group-item a {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.nav-link__evolution-isEevee {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .button {
@@ -177,34 +203,36 @@ body {
   top: 160px;
   z-index: 50;
   transform: rotate(20deg);
-  box-shadow: $box-shadow-light;
-  &:hover {
-    background-image: linear-gradient(
-      180deg,
-      $red 50px,
-      $black 50px,
-      $black 60px,
-      $white 1px
-    );
-  }
-  &:hover::before {
-    content: '';
-    height: 30px;
-    width: 30px;
-    position: absolute;
-    top: 45px;
-    left: 45px;
-    border-radius: 50%;
-    border: solid 4px $white;
-    background-color: $dark-white;
-    box-shadow: 0px 0px 0px 4px;
-  }
-  &__span {
-    font-size: 16px;
-  }
-  &:hover &__span {
-    color: transparent;
-  }
+  box-shadow: var(--box-shadow-light);
+}
+
+.button:hover {
+  background-image: linear-gradient(180deg,
+      var(--red) 50px,
+      var(--black) 50px,
+      var(--black) 60px,
+      var(--white) 1px);
+}
+
+.button:hover::before {
+  content: '';
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 45px;
+  left: 45px;
+  border-radius: 50%;
+  border: solid 4px var(--white);
+  background-color: var(--dark-white);
+  box-shadow: 0px 0px 0px 4px;
+}
+
+.button__span {
+  font-size: 16px;
+}
+
+.button:hover .button__span {
+  color: transparent;
 }
 
 @media screen and (max-width: 860px) {
@@ -212,6 +240,7 @@ body {
     right: 5px;
   }
 }
+
 @media screen and (max-width: 480px) {
   .button {
     top: 50px;

@@ -27,44 +27,39 @@ const Pokedex = () => {
   };
 
   return (
-    <Container fluid className='pokedex'>
+    <div className='pokedex'>
       {loading ? (
-        <Spinner animation='border' role='status'>
+        <div role='status'>
           <span className='visually-hidden'>Fetching Pokemon...</span>
-        </Spinner>
+        </div>
       ) : (
-        <Row>
+        <div>
           {pokemon.map((pokemon: any, index: number) => (
-            <Col
-              key={index}
-              xs={12}
-              sm={6}
-              lg={3}
-              xl={2}
+            <div
               className='pokedex__col'
             >
-              <Card className='pokedex__card'>
+              <div className='pokedex__card'>
                 <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
-                  <Card.Img
+                  <img
                     src={pokemon.image}
                     alt={pokemon.name}
                     width='180'
                     height='180'
                   />
-                  <Card.Body>
-                    <Card.Text>
+                  <div>
+                    <p>
                       #{(index + 1).toString().padStart(3, '0')}
-                    </Card.Text>
-                    <Card.Title>{pokemon.name}</Card.Title>
-                  </Card.Body>
+                    </p>
+                    <h2>{pokemon.name}</h2>
+                  </div>
                 </Link>
-              </Card>
-            </Col>
+              </div>
+            </div>
           ))}
-        </Row>
+        </div>
       )}
       <ScrollArrow />
-    </Container>
+    </div>
   );
 };
 
