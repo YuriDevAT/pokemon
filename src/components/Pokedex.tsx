@@ -33,27 +33,25 @@ const Pokedex = () => {
           <span className='visually-hidden'>Fetching Pokemon...</span>
         </div>
       ) : (
-        <div>
+        <div className="pokedex__col">
           {pokemon.map((pokemon: any, index: number) => (
-            <div
-              className='pokedex__col'
-            >
-              <div className='pokedex__card'>
-                <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
-                  <img
-                    src={pokemon.image}
-                    alt={pokemon.name}
-                    width='180'
-                    height='180'
-                  />
-                  <div>
-                    <p>
-                      #{(index + 1).toString().padStart(3, '0')}
-                    </p>
-                    <h2>{pokemon.name}</h2>
-                  </div>
-                </Link>
-              </div>
+            <div className='pokedex__card'>
+              <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
+                <img
+                  src={pokemon.image}
+                  alt={pokemon.name}
+                  width='180'
+                  height='180'
+                  loading="lazy"
+                  placeholder='/logo.svg'
+                />
+                <div>
+                  <p>
+                    #{(index + 1).toString().padStart(3, '0')}
+                  </p>
+                  <h2>{pokemon.name}</h2>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
