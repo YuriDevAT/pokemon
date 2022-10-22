@@ -22,7 +22,9 @@ const Pokedex = () => {
       setPokemon(pokedex);
       setLoading(false);
     } catch (err) {
-      console.error(err);
+      <div role='status'>
+        <span className='visually-hidden'>An error occurred.</span>
+      </div>
     }
   };
 

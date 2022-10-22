@@ -66,16 +66,26 @@ body {
 }
 
 .scrollTop {
+  height: 50px;
+  width: 50px;
+  background-color: #000;
+  border-radius: 50%;
+
+
   position: fixed;
   font-size: 60px;
   right: 20px;
   bottom: 20px;
   align-items: flex-end;
-  z-index: 1000;
-  cursor: pointer;
+  z-index: 999;
   animation: fadeIn 0.5s;
   transition: opacity 0.4s ease-in;
   opacity: 0.5;
+}
+
+.scrollTop svg {
+  color: white;
+  margin: auto;
 }
 
 .scrollTop:hover {
