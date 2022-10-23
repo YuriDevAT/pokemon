@@ -51,12 +51,9 @@ const Pokedex = () => {
                     height='180'
                     loading="lazy"
                   />
-                  <div>
-                    <p>
-                      #{(index + 1).toString().padStart(3, '0')}
-                    </p>
-                    <h2>{pokemon.name}</h2>
-                  </div>
+                  #{(index + 1).toString().padStart(3, '0')}
+                  <br />
+                  {pokemon.name}
                 </Link>
               </div>
             ))}
