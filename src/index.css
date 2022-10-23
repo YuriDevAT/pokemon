@@ -62,7 +62,7 @@ body {
 .pokedex__link,
 .pokedex__link:hover {
   text-decoration: none;
-  color: var(--black);
+  color: black;
 }
 
 .scrollTop {
@@ -134,7 +134,7 @@ body {
   border: none;
   width: 100px;
   margin: 5px 15px 0 0;
-  background-color: var(--glasmorphism);
+  background-color: rgba(256, 256, 256, 0.4);
 }
 
 .pokemon__image {
@@ -145,7 +145,7 @@ body {
 }
 
 .box {
-  background-color: var(--white);
+  background-color: white;
   min-height: 420px;
   margin: -60px 0 20px;
   border-radius: 20px;
@@ -159,7 +159,7 @@ body {
 
 .nav-link,
 .nav-link:hover {
-  color: var(--black);
+  color: black;
   background-color: transparent;
   z-index: 20;
 }
@@ -199,7 +199,7 @@ body {
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  color: var(--black);
+  color: black;
 }
 
 .nav-link__evolution-isEevee {
@@ -209,6 +209,8 @@ body {
 }
 
 .button {
+  background-color: #333;
+  color: white;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -217,15 +219,16 @@ body {
   top: 160px;
   z-index: 50;
   transform: rotate(20deg);
-  box-shadow: var(--box-shadow-light);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .button:hover {
   background-image: linear-gradient(180deg,
-      var(--red) 50px,
-      var(--black) 50px,
-      var(--black) 60px,
-      var(--white) 1px);
+      #de1602 50px,
+      black 50px,
+      black 60px,
+      white 1px);
 }
 
 .button:hover::before {
@@ -236,8 +239,8 @@ body {
   top: 45px;
   left: 45px;
   border-radius: 50%;
-  border: solid 4px var(--white);
-  background-color: var(--dark-white);
+  border: solid 4px white;
+  background-color: #cccccc;
   box-shadow: 0px 0px 0px 4px;
 }
 
