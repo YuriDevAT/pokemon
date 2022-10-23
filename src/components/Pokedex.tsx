@@ -12,7 +12,7 @@ const Pokedex = () => {
 
   const getPokedex = async () => {
     try {
-      const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=898');
+      const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=905');
       const { results } = await res.json();
       const pokedex = results.map((pokemon: any, index: number) => {
         const paddedId = ('00' + (index + 1)).slice(-3);
@@ -22,9 +22,15 @@ const Pokedex = () => {
       setPokemon(pokedex);
       setLoading(false);
     } catch (err) {
-      console.error(err);
+      <div role='status'>
+        <span className='visually-hidden'>An error occurred.</span>
+      </div>
     }
   };
+
+  /** TO DO
+   * Only load the first 25 pokemon, then load more as the user scrolls or load more button
+   */
 
   return (
     <div className='pokedex'>
@@ -33,28 +39,30 @@ const Pokedex = () => {
           <span className='visually-hidden'>Fetching Pokemon...</span>
         </div>
       ) : (
-        <div className="pokedex__col">
-          {pokemon.map((pokemon: any, index: number) => (
-            <div className='pokedex__card'>
-              <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
-                <img
-                  src={pokemon.image}
-                  alt={pokemon.name}
-                  width='180'
-                  height='180'
-                  loading="lazy"
-                  placeholder='/logo.svg'
-                />
-                <div>
-                  <p>
-                    #{(index + 1).toString().padStart(3, '0')}
-                  </p>
-                  <h2>{pokemon.name}</h2>
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="pokedex__col">
+            {pokemon.map((pokemon: { image: string, name: string }, index: number) => (
+              <div className='pokedex__card'>
+                <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
+                  <img
+                    src={pokemon.image}
+                    alt={pokemon.name}
+                    width='180'
+                    height='180'
+                    loading="lazy"
+                  />
+                  <div>
+                    <p>
+                      #{(index + 1).toString().padStart(3, '0')}
+                    </p>
+                    <h2>{pokemon.name}</h2>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+          <button type="button">Catch more pokemon</button>
+        </>
       )}
       <ScrollArrow />
     </div>
