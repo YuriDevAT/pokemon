@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import ScrollArrow from './ScrollArrow';
 
 const Pokedex = () => {
+
+  interface IPokedex {
+    name: string;
+    image: string;
+  }
+
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +47,7 @@ const Pokedex = () => {
       ) : (
         <>
           <div className="pokedex__col">
-            {pokemon.map((pokemon: { image: string, name: string }, index: number) => (
+            {pokemon.map((pokemon: IPokedex, index: number) => (
               <div className='pokedex__card'>
                 <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
                   <img
