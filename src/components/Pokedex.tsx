@@ -8,8 +8,10 @@ const Pokedex = () => {
     name: string;
     image: string;
   }
+  const eachFetch: number = 50;
 
   const [pokemon, setPokemon] = useState([]);
+  const [next, setNext] = useState(eachFetch);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,9 +36,9 @@ const Pokedex = () => {
     }
   };
 
-  /** TO DO
-   * Only load the first 25 pokemon, then load more as the user scrolls or load more button
-   */
+  const handleMoreButton = () => {
+    setNext(next + eachFetch);
+  };
 
   return (
     <div className='pokedex'>
@@ -47,7 +49,7 @@ const Pokedex = () => {
       ) : (
         <>
           <div className="pokedex__col">
-            {pokemon.map((pokemon: IPokedex, index: number) => (
+            {pokemon.slice(0, next).map((pokemon: IPokedex, index: number) => (
               <div className='pokedex__card'>
                 <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
                   <img
@@ -55,7 +57,7 @@ const Pokedex = () => {
                     alt={pokemon.name}
                     width='180'
                     height='180'
-                    loading="lazy"
+                    className="pokedex__image"
                   />
                   #{(index + 1).toString().padStart(3, '0')}
                   <br />
@@ -64,7 +66,11 @@ const Pokedex = () => {
               </div>
             ))}
           </div>
-          <button type="button">Catch more pokemon</button>
+          {next < pokemon.length && (
+            <button type="button" className="button-more" onClick={handleMoreButton}>
+              Catch more pokemon &#9863;
+            </button>
+          )}
         </>
       )}
       <ScrollArrow />
