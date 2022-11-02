@@ -8,11 +8,12 @@ const Pokedex = () => {
     name: string;
     image: string;
   }
+
   const eachFetch: number = 50;
 
-  const [pokemon, setPokemon] = useState([]);
+  const [pokedex, setPokedex] = useState([]);
   const [next, setNext] = useState(eachFetch);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getPokedex();
@@ -27,12 +28,14 @@ const Pokedex = () => {
         const image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`;
         return { ...pokemon, image };
       });
-      setPokemon(pokedex);
-      setLoading(false);
+      setPokedex(pokedex);
+      setIsLoading(false);
     } catch (err) {
-      <div role='status'>
-        <span className='visually-hidden'>An error occurred.</span>
-      </div>
+      return (
+        <div role='status'>
+          <span className='visually-hidden'>An error occurred.</span>
+        </div>
+      )
     }
   };
 
@@ -42,14 +45,14 @@ const Pokedex = () => {
 
   return (
     <div className='pokedex'>
-      {loading ? (
+      {isLoading ? (
         <div role='status'>
           <span className='visually-hidden'>Fetching Pokemon...</span>
         </div>
       ) : (
         <>
           <div className="pokedex__col">
-            {pokemon.slice(0, next).map((pokemon: IPokedex, index: number) => (
+            {pokedex.slice(0, next).map((pokemon: IPokedex, index: number) => (
               <div className='pokedex__card'>
                 <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
                   <img
@@ -66,7 +69,7 @@ const Pokedex = () => {
               </div>
             ))}
           </div>
-          {next < pokemon.length && (
+          {next < pokedex.length && (
             <button type="button" className="button-more" onClick={handleMoreButton}>
               Catch more pokemon &#9863;
             </button>
