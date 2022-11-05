@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('pokedex has bulbasaur in list and go to details link linking to bulbasaurs details', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('https://pokemon25.netlify.app/');
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Pokemon/);
