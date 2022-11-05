@@ -273,35 +273,10 @@ body {
   background-color: transparent;
 }
 
-/* .button-more {
-  background-image: linear-gradient(180deg,
-      #de1602 50px,
-      black 50px,
-      black 60px,
-      white 1px);
+.button-more:hover {
+  background-color: black;
   color: white;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  position: relative;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border: none;
-  display: flex;
-  align-items: end;
-  padding-bottom: 12px;
-} */
-
-/* .button-more__span {
-  visibility: hidden;
-  color: black;
-  font-size: 12px;
 }
-
-.button-more__span:hover,
-.button-more__span:focus {
-  visibility: visible;
-} */
 
 @media screen and (max-width: 860px) {
   .button {
