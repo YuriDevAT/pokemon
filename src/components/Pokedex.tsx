@@ -7,9 +7,27 @@ import { LoadButton } from './LoadButton';
 
 const Pokedex = () => {
   const eachFetch: number = 50;
+  /**
+   * It is possible to fetch lets say 50 pokemon with https://pokeapi.co/api/v2/pokemon?limit=50
+   * and with data.next we can fetch the next 50 pokemon
+   * like
+   * 
+   * const [loadMore, setLoadMore] = useState('https://pokeapi.co/api/v2/pokemon?limit=50')
+   * 
+   * const createPokedex = async () => {
+   * const res = await fetch(loadMore);
+   * const data = await res.json();
+   * setLoadMore(data.next);
+   * 
+   * getCount(data.count); // all pokemon available on the api to use it in line 74
+   * 
+   * ...
+   * }
+   * 
+   */
 
   const [pokedex, setPokedex] = useState([]);
-  const [next, setNext] = useState(eachFetch);
+  const [loadMore, setLoadMore] = useState(eachFetch);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -22,7 +40,7 @@ const Pokedex = () => {
   }, []);
 
   const handleMoreButton = () => {
-    setNext(next + eachFetch);
+    setLoadMore(loadMore + eachFetch);
   };
 
   return (
@@ -35,7 +53,7 @@ const Pokedex = () => {
         <>
           <div className="pokedex__col" >
             {
-              pokedex.slice(0, next).map((pokemon: IPokedex, index: number) => (
+              pokedex.slice(0, loadMore).map((pokemon: IPokedex, index: number) => (
                 <div key={index} className='pokedex__card'>
                   <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
                     <img
@@ -53,7 +71,7 @@ const Pokedex = () => {
               ))
             }
           </div>
-          {next < pokedex.length && (
+          {loadMore < pokedex.length && (
             <LoadButton onClick={handleMoreButton} />
           )}
         </>
