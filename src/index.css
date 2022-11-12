@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
 
 root {
   --primary-color: #333;
@@ -10,7 +8,6 @@ root {
   --white: #fff;
   --dark-white: #cccccc;
   --red: #de1602;
-  --glasmorphism: rgba(256, 256, 256, 0.4);
   --disabled: #d3d3d3;
   --box-shadow-light: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -35,6 +32,9 @@ body {
   width: 100vw;
   position: relative;
   background-image: linear-gradient(to right, #dae2f8, #d6a4a4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pokedex__col {
@@ -63,6 +63,13 @@ body {
 .pokedex__link:hover {
   text-decoration: none;
   color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokedex_image {
+  width: 180px;
+  height: 180px;
 }
 
 .scrollTop {
@@ -70,8 +77,6 @@ body {
   width: 50px;
   background-color: #000;
   border-radius: 50%;
-
-
   position: fixed;
   font-size: 60px;
   right: 20px;
@@ -81,6 +86,7 @@ body {
   animation: fadeIn 0.5s;
   transition: opacity 0.4s ease-in;
   opacity: 0.5;
+  border: 2px solid white;
 }
 
 .scrollTop svg {
@@ -244,12 +250,32 @@ body {
   box-shadow: 0px 0px 0px 4px;
 }
 
+/* .button-more::before {
+  left: 40px;
+  top: 40px;
+} */
+
 .button__span {
   font-size: 16px;
 }
 
 .button:hover .button__span {
   color: transparent;
+  background-color: none;
+}
+
+.button-more {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-family: 'Dosis', sans-serif;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.button-more:hover {
+  background-color: black;
+  color: white;
 }
 
 @media screen and (max-width: 860px) {

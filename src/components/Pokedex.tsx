@@ -1,70 +1,79 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollArrow from './ScrollArrow';
+import { getPokedex } from '../utils/getPokedex';
+import IPokedex from '../interfaces/IPokedex';
+import { LoadButton } from './LoadButton';
 
 const Pokedex = () => {
+  const eachFetch: number = 50;
+  /**
+   * It is possible to fetch lets say 50 pokemon with https://pokeapi.co/api/v2/pokemon?limit=50
+   * and with data.next we can fetch the next 50 pokemon
+   * like
+   * 
+   * const [loadMore, setLoadMore] = useState('https://pokeapi.co/api/v2/pokemon?limit=50')
+   * 
+   * const createPokedex = async () => {
+   * const res = await fetch(loadMore);
+   * const data = await res.json();
+   * setLoadMore(data.next);
+   * 
+   * getCount(data.count); // all pokemon available on the api to use it in line 74
+   * 
+   * ...
+   * }
+   * 
+   */
 
-  interface IPokedex {
-    name: string;
-    image: string;
-  }
-
-  const [pokemon, setPokemon] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [pokedex, setPokedex] = useState([]);
+  const [loadMore, setLoadMore] = useState(eachFetch);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getPokedex();
+    const loadPokedex = async () => {
+      const pokedex = await getPokedex();
+      setPokedex(pokedex);
+    };
+    loadPokedex();
+    setIsLoading(false);
   }, []);
 
-  const getPokedex = async () => {
-    try {
-      const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=905');
-      const { results } = await res.json();
-      const pokedex = results.map((pokemon: any, index: number) => {
-        const paddedId = ('00' + (index + 1)).slice(-3);
-        const image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`;
-        return { ...pokemon, image };
-      });
-      setPokemon(pokedex);
-      setLoading(false);
-    } catch (err) {
-      <div role='status'>
-        <span className='visually-hidden'>An error occurred.</span>
-      </div>
-    }
+  const handleMoreButton = () => {
+    setLoadMore(loadMore + eachFetch);
   };
-
-  /** TO DO
-   * Only load the first 25 pokemon, then load more as the user scrolls or load more button
-   */
 
   return (
     <div className='pokedex'>
-      {loading ? (
+      {isLoading ? (
         <div role='status'>
           <span className='visually-hidden'>Fetching Pokemon...</span>
         </div>
       ) : (
         <>
-          <div className="pokedex__col">
-            {pokemon.map((pokemon: IPokedex, index: number) => (
-              <div className='pokedex__card'>
-                <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
-                  <img
-                    src={pokemon.image}
-                    alt={pokemon.name}
-                    width='180'
-                    height='180'
-                    loading="lazy"
-                  />
-                  #{(index + 1).toString().padStart(3, '0')}
-                  <br />
-                  {pokemon.name}
-                </Link>
-              </div>
-            ))}
+          <div className="pokedex__col" >
+            {
+              pokedex.slice(0, loadMore).map((pokemon: IPokedex, index: number) => (
+                <div key={index} className='pokedex__card'>
+                  <Link to={`/pokemon/${index + 1}`} className='pokedex__link'>
+                    <img
+                      src={pokemon.image}
+                      alt={pokemon.name}
+                      width='180'
+                      height='180'
+                      className="pokedex__image"
+                    />
+                    #{(index + 1).toString().padStart(3, '0')}
+                    <br />
+                    {pokemon.name}
+                  </Link>
+                </div>
+              ))
+            }
           </div>
-          <button type="button">Catch more pokemon</button>
+          {loadMore < pokedex.length && (
+            <LoadButton onClick={handleMoreButton} />
+          )}
         </>
       )}
       <ScrollArrow />
